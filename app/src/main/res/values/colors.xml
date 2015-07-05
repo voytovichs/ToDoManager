@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="text_color">#2299AA</color>
+    <color name="hint_text_color">#D0D0D0</color>
+</resources>
