@@ -10,7 +10,10 @@
         android:focusableInTouchMode="true"
         android:layout_width="0px"
         android:layout_height="0px"
-        xmlns:android="http://schemas.android.com/apk/res/android" />
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+
+        <requestFocus />
+    </LinearLayout>
 
     <EditText
         android:layout_width="match_parent"
@@ -23,11 +26,8 @@
         android:textIsSelectable="true"
         android:inputType="text" />
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent">
-
-    </ScrollView>
-
+    <requestFocus
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
