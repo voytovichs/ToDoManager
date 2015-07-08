@@ -2,12 +2,30 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_text_view"
+        android:id="@+id/title_text_view"
+        android:theme="@style/AppTheme"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/hintTextColor"
+        android:textSize="@dimen/abc_text_size_headline_material"
+        android:focusable="true"
+        android:layout_margin="10dp" />
 
     <EditText
         android:id="@+id/taskTitleTextEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:password="false" />
+        android:password="false"
+        android:theme="@style/AppTheme"
+        android:textIsSelectable="true"
+        android:textColorHint="@color/hintTextColor"
+        android:hint="@string/hint_text_edit"
+        android:backgroundTint="@color/primaryColor" />
+
 </LinearLayout>
