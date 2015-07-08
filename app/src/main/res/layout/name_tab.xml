@@ -26,6 +26,10 @@
         android:textIsSelectable="true"
         android:textColorHint="@color/hintTextColor"
         android:hint="@string/hint_text_edit"
-        android:backgroundTint="@color/primaryColor" />
+        android:backgroundTint="@color/primaryColor"
+        android:autoText="true"
+        android:clickable="true"
+        android:inputType="textShortMessage"
+        android:textColor="@color/textColor" />
 
 </LinearLayout>

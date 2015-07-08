@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager;
+package com.voytovichs.todomanager.addtaskactivity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,8 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import com.voytovichs.todomanager.adapters.ViewPagerAdapter;
-import com.voytovichs.todomanager.layouts.SlidingTabLayout;
+import com.voytovichs.todomanager.R;
+import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
+import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 
 /**
  * Created by voytovichs on 05.07.15.
@@ -18,7 +19,6 @@ public class AddTaskItemActivity extends ActionBarActivity {
 
     private final static CharSequence[] tabTittles = {"Description", "Date"};
 
-    private EditText mTittle = null;
     private Toolbar mToolbar = null;
     private ViewPager mViewPager = null;
     private ViewPagerAdapter mViewPagerAdapter = null;
@@ -59,15 +59,14 @@ public class AddTaskItemActivity extends ActionBarActivity {
         mTabs.setViewPager(mViewPager);
     }
 
-
-    private void showKeyboard() {
+    private void showKeyboard(EditText editText) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    private void hideKeyboardFromTitle() {
+    private void hideKeyboard(EditText editText) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(mTittle.getWindowToken(), 0);
+        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
 }
