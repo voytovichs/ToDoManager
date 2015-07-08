@@ -41,7 +41,7 @@ public class AddTaskItemActivity extends ActionBarActivity {
 
     private void setTabs() {
         mViewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(), tabTittles);
-        mViewPager = (ViewPager) findViewById(R.id.pager);//!!!!!!!!!!!!!!!!!!!!!!rename
+        mViewPager = (ViewPager) findViewById(R.id.tabs_view_pager);
         mViewPager.setAdapter(mViewPagerAdapter);
 
         mTabs = (SlidingTabLayout) findViewById(R.id.tabs);
