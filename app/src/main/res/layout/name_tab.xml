@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/title_text_view"
-        android:id="@+id/title_text_view"
+        android:id="@+id/taskAddTitleView"
         android:theme="@style/AppTheme"
         android:textColor="@color/textColor"
         android:textColorHint="@color/hintTextColor"
@@ -30,6 +30,7 @@
         android:autoText="true"
         android:clickable="true"
         android:inputType="textShortMessage"
-        android:textColor="@color/textColor" />
+        android:textColor="@color/secondaryText"
+        android:textColorHighlight="@color/primaryColor" />
 
 </LinearLayout>

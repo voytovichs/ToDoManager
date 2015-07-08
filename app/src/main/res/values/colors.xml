@@ -6,5 +6,6 @@
     <color name="tabsScrollColor">#8a140e</color>
     <color name="accentColor">#d32f2f</color>
     <color name="textColor">#e53935</color>
+    <color name="secondaryText">#808080</color>
     <color name="hintTextColor">#a0a0a0</color>
 </resources>
