@@ -22,6 +22,7 @@ public class AddTaskItemActivity extends ActionBarActivity implements NameTabFra
     private ViewPagerAdapter mViewPagerAdapter = null;
     private SlidingTabLayout mTabs = null;
     private String titleText = null;
+    private String description = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,6 @@ public class AddTaskItemActivity extends ActionBarActivity implements NameTabFra
 
     @Override
     public void sendCommentText(String comment) {
-
+        this.description = comment;
     }
 }

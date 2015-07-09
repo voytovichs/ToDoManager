@@ -33,6 +33,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.name_tab, container, false);
         setTitleEditText(view);
+        setDescriptionEditText(view);
 
         return view;
     }
@@ -48,13 +49,6 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement MainPageItemsListener");
-        }
-    }
-
-    public void getTitleText(View v) {
-        if (mCallback != null) {
-            EditText edit = (EditText) getActivity().findViewById(R.id.taskTitleTextEdit);
-            mCallback.sendTitleText(edit.getText().toString());
         }
     }
 
@@ -80,6 +74,38 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     mCallback.sendTitleText(editText.getText().toString());
+                    hideKeyboard(editText);
+                    return true;
+                }
+                return false;
+            }
+        });
+        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+    }
+
+    private void setDescriptionEditText(final View mainView) {
+        final EditText editText = (EditText) mainView.findViewById(R.id.taskDescriptionTextEdit);
+        editText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showKeyboard(editText);
+            }
+        });
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(editText);
+                    mCallback.sendCommentText(editText.getText().toString());
+                }
+            }
+        });
+        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    mCallback.sendCommentText(
+                            editText.getText().toString());
                     hideKeyboard(editText);
                     return true;
                 }

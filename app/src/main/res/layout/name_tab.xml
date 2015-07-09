@@ -25,15 +25,60 @@
         android:autoText="false"
         android:backgroundTint="@color/primaryColor"
         android:clickable="true"
+        android:elegantTextHeight="false"
         android:hint="@string/hint_text_edit"
         android:imeOptions="actionDone"
-        android:inputType="text|textAutoComplete|textAutoCorrect"
+        android:inputType="textAutoComplete|textAutoCorrect"
         android:password="false"
         android:textColor="@color/secondaryText"
         android:textColorHighlight="@color/primaryColor"
         android:textColorHint="@color/hintTextColor"
         android:textIsSelectable="true"
-        android:theme="@style/AppTheme"
-        android:elegantTextHeight="false" />
+        android:theme="@style/AppTheme" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:focusable="true"
+        android:text="@string/description_view_text"
+        android:textColor="@color/textColor"
+        android:textColorHint="@color/hintTextColor"
+        android:textSize="@dimen/abc_text_size_headline_material"
+        android:theme="@style/AppTheme" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:theme="@style/AppTheme">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.voytovichs.todomanager.addtaskactivity.layouts.ActionEditText
+                android:id="@+id/taskDescriptionTextEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autoText="true"
+                android:backgroundTint="@color/primaryColor"
+                android:clickable="true"
+                android:elegantTextHeight="false"
+                android:hint="@string/hint_text_description"
+                android:inputType="textAutoCorrect|textCapSentences|textMultiLine"
+                android:linksClickable="false"
+                android:password="false"
+                android:textColor="@color/secondaryText"
+                android:textColorHighlight="@color/primaryColor"
+                android:textColorHint="@color/hintTextColor"
+                android:theme="@style/AppTheme" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

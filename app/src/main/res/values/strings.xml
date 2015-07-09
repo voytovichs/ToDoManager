@@ -3,4 +3,6 @@
     <string name="add_activity_header">Add new task</string>
     <string name="hint_text_edit">Enter the task name</string>
     <string name="title_text_view">Title</string>
+    <string name="description_view_text">Description</string>
+    <string name="hint_text_description">Add some description if you want</string>
 </resources>

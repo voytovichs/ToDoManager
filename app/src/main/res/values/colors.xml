@@ -8,4 +8,5 @@
     <color name="textColor">#e53935</color>
     <color name="secondaryText">#505050</color>
     <color name="hintTextColor">#a0a0a0</color>
+    <color name="buttonColor">#dddddd</color>
 </resources>
