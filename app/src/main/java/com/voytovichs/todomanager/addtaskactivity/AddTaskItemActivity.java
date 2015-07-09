@@ -1,21 +1,19 @@
 package com.voytovichs.todomanager.addtaskactivity;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
+import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 
 /**
  * Created by voytovichs on 05.07.15.
  */
-public class AddTaskItemActivity extends ActionBarActivity {
+public class AddTaskItemActivity extends ActionBarActivity implements NameTabFragment.MainPageItemsListener {
 
     private final static CharSequence[] tabTittles = {"Description", "Date"};
 
@@ -23,6 +21,7 @@ public class AddTaskItemActivity extends ActionBarActivity {
     private ViewPager mViewPager = null;
     private ViewPagerAdapter mViewPagerAdapter = null;
     private SlidingTabLayout mTabs = null;
+    private String titleText = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +58,13 @@ public class AddTaskItemActivity extends ActionBarActivity {
         mTabs.setViewPager(mViewPager);
     }
 
-    private void showKeyboard(EditText editText) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+    @Override
+    public void sendTitleText(String title) {
+        this.titleText = title;
     }
 
-    private void hideKeyboard(EditText editText) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
-    }
+    @Override
+    public void sendCommentText(String comment) {
 
+    }
 }
