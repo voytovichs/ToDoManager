@@ -6,9 +6,7 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -39,14 +37,14 @@ public class TaskItem {
     //@DatabaseField(canBeNull = false, dataType = DataType.ENUM, columnName = "status")
     private Status mStatus = Status.INCOMPLETED;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.DATE, columnName = "date")
-    private Date mDate = new Date();
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "date")
+    private String mDate = "";
 
     public TaskItem() {
 
     }
 
-    public TaskItem(String tittle, String comment, Status status, Date date) {
+    public TaskItem(String tittle, String comment, Status status, String date) {
         this.mTitle = tittle;
         this.mStatus = status;
         this.mDate = date;
@@ -58,12 +56,7 @@ public class TaskItem {
         mTitle = intent.getStringExtra(TaskItem.TITLE);
         mStatus = Status.valueOf(intent.getStringExtra(TaskItem.STATUS));
         mComment = intent.getStringExtra(TaskItem.COMMENT);
-
-        try {
-            mDate = TaskItem.FORMAT.parse(intent.getStringExtra(TaskItem.DATE));
-        } catch (ParseException e) {
-            mDate = new Date();
-        }
+        mDate = intent.getStringExtra(TaskItem.DATE);
     }
 
     public static void packageIntent(Intent intent, String title, String comment, Status status, String date) {
@@ -81,7 +74,7 @@ public class TaskItem {
         return mStatus;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return mDate;
     }
 
@@ -93,7 +86,7 @@ public class TaskItem {
         mStatus = status;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         mDate = date;
     }
 

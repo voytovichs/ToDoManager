@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
+import com.voytovichs.todomanager.addtaskactivity.fragments.CalendarTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 import com.voytovichs.todomanager.dao.TaskDAO;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 /**
  * Created by voytovichs on 05.07.15.
  */
-public class AddTaskItemActivity extends AppCompatActivity implements NameTabFragment.MainPageItemsListener {
+public class AddTaskItemActivity extends AppCompatActivity implements NameTabFragment.MainPageItemsListener, CalendarTabFragment.CalendarListener {
     private static final String TAG = AddTaskItemActivity.class.getSimpleName();
 
     private final static CharSequence[] tabTittles = {"Description", "Date"};
@@ -29,6 +30,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     private SlidingTabLayout mTabs = null;
     private String titleText = null;
     private String description = null;
+    private String dateString = null;
     private TaskDAO taskDAO;
 
     @Override
@@ -82,5 +84,10 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     @Override
     public void sendCommentText(String comment) {
         this.description = comment;
+    }
+
+    @Override
+    public void sendDate(String dateString) {
+        this.dateString = dateString;
     }
 }
