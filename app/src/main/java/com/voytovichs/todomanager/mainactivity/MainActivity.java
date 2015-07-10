@@ -1,7 +1,14 @@
 package com.voytovichs.todomanager.mainactivity;
 
-/**
- * Created by voytovichs on 10.07.15.
- */
-public class MainActivity {
+import android.app.ListActivity;
+import android.os.Bundle;
+
+
+public class MainActivity extends ListActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 }
