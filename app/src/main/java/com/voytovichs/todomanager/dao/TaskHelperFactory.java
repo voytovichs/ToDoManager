@@ -15,10 +15,12 @@ public class TaskHelperFactory {
     public static TaskDatabaseHelper getHelper(){
         return databaseHelper;
     }
+
     public static void setHelper(Context context){
         databaseHelper = OpenHelperManager.getHelper(context, TaskDatabaseHelper.class);
         Log.v(TAG, "Setting helper for " + TAG);
     }
+
     public static void releaseHelper(){
         OpenHelperManager.releaseHelper();
         databaseHelper = null;
