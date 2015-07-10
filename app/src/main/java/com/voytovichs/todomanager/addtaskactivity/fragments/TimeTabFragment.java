@@ -55,7 +55,6 @@ public class TimeTabFragment extends android.support.v4.app.Fragment {
 
     private void setTimePicker(View mainView) {
         final TimePicker clock = (TimePicker) mainView.findViewById(R.id.timePicker);
-        clock.setIs24HourView(true);
         mCallback.sendTime(getStringTime(clock));
         clock.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
