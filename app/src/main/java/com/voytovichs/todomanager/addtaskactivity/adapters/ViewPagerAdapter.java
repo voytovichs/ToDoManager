@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.voytovichs.todomanager.addtaskactivity.fragments.CalendarTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
+import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
 
 /**
  * Created by voytovichs on 08.07.15.
@@ -28,6 +29,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             }
             case 1: {
                 return new CalendarTabFragment();
+            }
+            case 2: {
+                return new TimeTabFragment();
             }
             default: {
                 throw new IllegalArgumentException("Wrong tab number: " + position);

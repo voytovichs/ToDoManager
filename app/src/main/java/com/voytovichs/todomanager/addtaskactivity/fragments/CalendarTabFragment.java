@@ -39,7 +39,7 @@ public class CalendarTabFragment extends android.support.v4.app.Fragment {
             mCallback = (CalendarListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement MainPageItemsListener");
+                    + " must implement Calendar");
         }
     }
 

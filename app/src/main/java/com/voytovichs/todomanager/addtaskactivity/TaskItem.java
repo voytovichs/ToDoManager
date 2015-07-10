@@ -6,9 +6,6 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 /**
  * Created by voytovichs on 03.07.15.
  */
@@ -17,13 +14,13 @@ public class TaskItem {
 
     public enum Status {COMPLETED, INCOMPLETED}
 
-    private final static String ITEM_SEP = System.getProperty("line.separator");
     private final static String TITLE = "title";
     private final static String STATUS = "status";
     private final static String DATE = "date";
+    private final static String TIME = "time";
     private final static String COMMENT = "comment";
 
-    public final static SimpleDateFormat FORMAT = new SimpleDateFormat("dd-MM-yyyy h:mm a", Locale.ENGLISH);
+    // public final static SimpleDateFormat FORMAT = new SimpleDateFormat("dd-MM-yyyy h:mm a", Locale.ENGLISH);
 
     @DatabaseField(generatedId = true)
     private int id;
@@ -40,15 +37,20 @@ public class TaskItem {
     @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "date")
     private String mDate = "";
 
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "time")
+    private String mTime = "";
+
     public TaskItem() {
 
     }
 
-    public TaskItem(String tittle, String comment, Status status, String date) {
+    public TaskItem(String tittle, String comment, Status status, String date, String time) {
         this.mTitle = tittle;
         this.mStatus = status;
         this.mDate = date;
         this.mComment = comment;
+        this.mTime = time;
+        this.mStatus = Status.INCOMPLETED;
     }
 
     public TaskItem(Intent intent) {
@@ -57,13 +59,16 @@ public class TaskItem {
         mStatus = Status.valueOf(intent.getStringExtra(TaskItem.STATUS));
         mComment = intent.getStringExtra(TaskItem.COMMENT);
         mDate = intent.getStringExtra(TaskItem.DATE);
+        mTime = intent.getStringExtra(TaskItem.TIME);
+        this.mStatus = Status.INCOMPLETED;
     }
 
-    public static void packageIntent(Intent intent, String title, String comment, Status status, String date) {
+    public static void packageIntent(Intent intent, String title, String comment, Status status, String date, String time) {
         intent.putExtra(TaskItem.TITLE, title);
         intent.putExtra(TaskItem.STATUS, status.toString());
         intent.putExtra(TaskItem.DATE, date);
         intent.putExtra(TaskItem.COMMENT, comment);
+        intent.putExtra(TaskItem.TIME, time);
     }
 
     public String getTitle() {
@@ -74,6 +79,11 @@ public class TaskItem {
         return mStatus;
     }
 
+    public void setStatus(Status status) {
+        mStatus = status;
+    }
+
+
     public String getDate() {
         return mDate;
     }
@@ -82,24 +92,18 @@ public class TaskItem {
         return mComment;
     }
 
-    public void setStatus(Status status) {
-        mStatus = status;
-    }
 
     public void setDate(String date) {
         mDate = date;
     }
 
-    public void setComment(String comment) {
-        mComment = comment;
+    public String getTime() {
+        return mTime;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
-    }
 
     public String toString() {
-        return mTitle + "\n" + mStatus + "\n" + FORMAT.format(mDate);
+        return mTitle + "\n" + mComment + "\n" + mStatus + "\n" + mDate + "\n" + mTime;
     }
 
 }

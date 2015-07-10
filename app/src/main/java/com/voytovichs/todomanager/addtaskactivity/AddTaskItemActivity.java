@@ -10,6 +10,7 @@ import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
 import com.voytovichs.todomanager.addtaskactivity.fragments.CalendarTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
+import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
@@ -19,10 +20,11 @@ import java.sql.SQLException;
 /**
  * Created by voytovichs on 05.07.15.
  */
-public class AddTaskItemActivity extends AppCompatActivity implements NameTabFragment.MainPageItemsListener, CalendarTabFragment.CalendarListener {
+public class AddTaskItemActivity extends AppCompatActivity implements NameTabFragment.MainPageItemsListener,
+        CalendarTabFragment.CalendarListener, TimeTabFragment.TimeListener {
     private static final String TAG = AddTaskItemActivity.class.getSimpleName();
 
-    private final static CharSequence[] tabTittles = {"Description", "Date"};
+    private final static CharSequence[] tabTittles = {"Title", "Date", "Time"};
 
     private Toolbar mToolbar = null;
     private ViewPager mViewPager = null;
@@ -31,6 +33,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     private String titleText = null;
     private String description = null;
     private String dateString = null;
+    private String timeString = null;
     private TaskDAO taskDAO;
 
     @Override
@@ -89,5 +92,10 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     @Override
     public void sendDate(String dateString) {
         this.dateString = dateString;
+    }
+
+    @Override
+    public void sendTime(String timeString) {
+        this.timeString = timeString;
     }
 }

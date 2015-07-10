@@ -7,6 +7,7 @@
         <item name="android:textColor">@color/primaryColor</item>
         <item name="android:textColorHint">@color/hintTextColor</item>
         <item name="android:datePickerDialogTheme">@style/MyDatePickerDialogTheme</item>
+        <item name="android:timePickerDialogTheme">@style/MyTimePickerDialogTheme</item>
     </style>
 
 
@@ -16,6 +17,15 @@
     </style>
 
     <style name="MyDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/primaryColorDark</item>
+    </style>
+
+    <style name="MyTimePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:timePickerStyle">@style/MyTimePickerStyle</item>
+        <item name="android:colorAccent">@color/accentColor</item>
+    </style>
+
+    <style name="MyTimePickerStyle" parent="@android:style/Widget.Material.Light.TimePicker">
         <item name="android:headerBackground">@color/primaryColorDark</item>
     </style>
 
