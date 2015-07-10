@@ -2,7 +2,7 @@ package com.voytovichs.todomanager.addtaskactivity;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.voytovichs.todomanager.R;
@@ -13,7 +13,7 @@ import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 /**
  * Created by voytovichs on 05.07.15.
  */
-public class AddTaskItemActivity extends ActionBarActivity implements NameTabFragment.MainPageItemsListener {
+public class AddTaskItemActivity extends AppCompatActivity implements NameTabFragment.MainPageItemsListener {
 
     private final static CharSequence[] tabTittles = {"Description", "Date"};
 

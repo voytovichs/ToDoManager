@@ -1,10 +1,10 @@
 package com.voytovichs.todomanager.mainactivity;
 
-import android.app.ListActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
 
-public class MainActivity extends ListActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
