@@ -51,7 +51,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
             Log.e(TAG, "Couldn't load DAO for tasks");
         }
 
-        setContentView(R.layout.add_task_layout);
+        setContentView(R.layout.add_task_activity_layout);
 
         setToolbar();
         setTabs();

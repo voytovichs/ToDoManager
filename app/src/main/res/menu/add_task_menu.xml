@@ -8,5 +8,4 @@
         android:icon="@drawable/yarik_ok"
         android:title="@string/menu_done"
         support:showAsAction="ifRoom" />
-
 </menu>
