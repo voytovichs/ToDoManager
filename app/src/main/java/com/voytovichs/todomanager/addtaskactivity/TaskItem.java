@@ -63,12 +63,14 @@ public class TaskItem {
         this.mStatus = Status.INCOMPLETED;
     }
 
-    public static void packageIntent(Intent intent, String title, String comment, Status status, String date, String time) {
-        intent.putExtra(TaskItem.TITLE, title);
-        intent.putExtra(TaskItem.STATUS, status.toString());
-        intent.putExtra(TaskItem.DATE, date);
-        intent.putExtra(TaskItem.COMMENT, comment);
-        intent.putExtra(TaskItem.TIME, time);
+    public static Intent packageIntent(String title, String comment, Status status, String date, String time) {
+        Intent data = new Intent();
+        data.putExtra(TaskItem.TITLE, title);
+        data.putExtra(TaskItem.STATUS, status.toString());
+        data.putExtra(TaskItem.DATE, date);
+        data.putExtra(TaskItem.COMMENT, comment);
+        data.putExtra(TaskItem.TIME, time);
+        return data;
     }
 
     public String getTitle() {

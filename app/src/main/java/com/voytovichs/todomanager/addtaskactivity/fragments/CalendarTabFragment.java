@@ -58,15 +58,13 @@ public class CalendarTabFragment extends android.support.v4.app.Fragment {
     }
 
     private void setDatePicker(View mainView) {
-        final DatePicker calendar = (DatePicker) mainView.findViewById(R.id.datePicker);
-        mCallback.sendDate(getStringDate(calendar));
-        calendar.init(calendar.getYear(), calendar.getMonth(), calendar.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
+        final DatePicker mCalendar = (DatePicker) mainView.findViewById(R.id.datePicker);
+        mCallback.sendDate(getStringDate(mCalendar));
+        mCalendar.init(mCalendar.getYear(), mCalendar.getMonth(), mCalendar.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 mCallback.sendDate(toStringDate(year, monthOfYear, dayOfMonth));
             }
         });
     }
-
-
 }

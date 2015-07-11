@@ -21,6 +21,8 @@ import com.voytovichs.todomanager.R;
 public class NameTabFragment extends android.support.v4.app.Fragment {
 
     MainPageItemsListener mCallback;
+    EditText mTitle = null;
+    EditText mComment = null;
 
     // Container Activity must implement this interface
     public interface MainPageItemsListener {
@@ -81,6 +83,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             }
         });
         editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        hideKeyboard(editText);
     }
 
     private void setDescriptionEditText(final View mainView) {

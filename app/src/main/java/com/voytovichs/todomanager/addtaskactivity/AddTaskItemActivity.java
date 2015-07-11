@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
@@ -22,6 +24,7 @@ import java.sql.SQLException;
  */
 public class AddTaskItemActivity extends AppCompatActivity implements NameTabFragment.MainPageItemsListener,
         CalendarTabFragment.CalendarListener, TimeTabFragment.TimeListener {
+
     private static final String TAG = AddTaskItemActivity.class.getSimpleName();
 
     private final static CharSequence[] tabTittles = {"Title", "Date", "Time"};
@@ -31,7 +34,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     private ViewPagerAdapter mViewPagerAdapter = null;
     private SlidingTabLayout mTabs = null;
     private String titleText = null;
-    private String description = null;
+    private String descriptionText = null;
     private String dateString = null;
     private String timeString = null;
     private TaskDAO taskDAO;
@@ -80,13 +83,32 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_task_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.add_task_menu_done: {
+                setResult(RESULT_OK, TaskItem.packageIntent(titleText, descriptionText, TaskItem.Status.INCOMPLETED, dateString, timeString));
+                finish();
+                return true;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void sendTitleText(String title) {
         this.titleText = title;
     }
 
     @Override
     public void sendCommentText(String comment) {
-        this.description = comment;
+        this.descriptionText = comment;
     }
 
     @Override
