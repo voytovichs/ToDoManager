@@ -44,9 +44,17 @@ public class TaskItem {
 
     }
 
-    public TaskItem(String tittle, String comment, Status status, String date, String time) {
+    public TaskItem(String tittle, String comment, String status, String date, String time) {
         this.mTitle = tittle;
-        this.mStatus = status;
+
+        if (status.equals("COMPLETED")) {
+            this.mStatus = Status.COMPLETED;
+        } else if (status.equals("INCOMPLETED")) {
+            this.mStatus = Status.INCOMPLETED;
+        } else {
+            throw new IllegalArgumentException("Status string value is not a valid status");
+        }
+
         this.mDate = date;
         this.mComment = comment;
         this.mTime = time;

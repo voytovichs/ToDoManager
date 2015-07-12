@@ -16,11 +16,22 @@ import com.voytovichs.todomanager.dao.TaskHelperFactory;
 import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
 import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int BUTTON_ICON_SIZE = 70;
     private static final int ADD_TODO_ITEM_REQUEST = 1;
+    private static final String FILE_NAME = "ToDoData.txt";
+
 
     private ListViewAdapter mAdapter;
 
@@ -65,7 +76,72 @@ public class MainActivity extends AppCompatActivity {
             TaskItem item = new TaskItem(data);
             mAdapter.add(item);
         }
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mAdapter.getCount() == 0) {
+            loadItems();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveItems();
+
+    }
+
+    private void saveItems() {
+        PrintWriter writer = null;
+        try {
+            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
+            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(fos)));
+            for (int idx = 0; idx < mAdapter.getCount(); idx++) {
+                writer.println(mAdapter.getItem(idx));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (writer != null) {
+                writer.close();
+            }
+        }
+    }
+
+    private void loadItems() {
+        BufferedReader reader = null;
+        try {
+            FileInputStream fis = openFileInput(FILE_NAME);
+            reader = new BufferedReader(new InputStreamReader(fis));
+
+            String title = null;
+            String status = null;
+            String date = null;
+            String time = null;
+            String description = null;
+
+            while (null != (title = reader.readLine())) {
+                //  title = reader.readLine();
+                description = reader.readLine();
+                status = reader.readLine();
+                date = reader.readLine();
+                time = reader.readLine();
+                mAdapter.add(new TaskItem(title, description, status, date, time));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (null != reader) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 
