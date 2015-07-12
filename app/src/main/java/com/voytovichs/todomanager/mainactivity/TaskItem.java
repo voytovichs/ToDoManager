@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.addtaskactivity;
+package com.voytovichs.todomanager.mainactivity;
 
 import android.content.Intent;
 

@@ -16,6 +16,7 @@ import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
+import com.voytovichs.todomanager.mainactivity.TaskItem;
 
 import java.sql.SQLException;
 
