@@ -58,7 +58,6 @@ public class TaskItem {
         this.mDate = date;
         this.mComment = comment;
         this.mTime = time;
-        this.mStatus = Status.INCOMPLETED;
     }
 
     public TaskItem(Intent intent) {
