@@ -2,12 +2,10 @@ package com.voytovichs.todomanager.mainactivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listView);
         mAdapter = new ListViewAdapter(this);
         list.setAdapter(mAdapter);
-        LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getScreenHeight());
+        LinearLayout.LayoutParams mParam =
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         list.setLayoutParams(mParam);
         setFloatingButton();
     }
@@ -147,13 +146,4 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-    private int getScreenHeight() {
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        return size.y;
-    }
-
-
 }
