@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
             writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(fos)));
-            for (int idx = 0; idx < mAdapter.getCount(); idx++) {
-                writer.println(mAdapter.getItem(idx));
+            for (int i = mAdapter.getCount() - 1; i >= 0; i--) {
+                writer.println(mAdapter.getItem(i));
             }
         } catch (IOException e) {
             e.printStackTrace();

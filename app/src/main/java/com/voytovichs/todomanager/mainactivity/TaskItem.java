@@ -32,13 +32,13 @@ public class TaskItem {
     private String mComment;
 
     //@DatabaseField(canBeNull = false, dataType = DataType.ENUM, columnName = STATUS)
-    private Status mStatus = Status.INCOMPLETED;
+    private Status mStatus;
 
     @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = DATE)
-    private String mDate = "";
+    private String mDate;
 
     @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = TIME)
-    private String mTime = "";
+    private String mTime;
 
     public TaskItem() {
     }
@@ -46,12 +46,15 @@ public class TaskItem {
     public TaskItem(String tittle, String comment, String status, String date, String time) {
         this.mTitle = tittle;
 
-        if (status.equals("COMPLETED")) {
-            this.mStatus = Status.COMPLETED;
-        } else if (status.equals("INCOMPLETED")) {
-            this.mStatus = Status.INCOMPLETED;
-        } else {
-            throw new IllegalArgumentException("Status string value is not a valid status");
+        switch (status) {
+            case "COMPLETED":
+                this.mStatus = Status.COMPLETED;
+                break;
+            case "INCOMPLETED":
+                this.mStatus = Status.INCOMPLETED;
+                break;
+            default:
+                throw new IllegalArgumentException("Status string value is not a valid status");
         }
 
         this.mDate = date;
@@ -71,11 +74,7 @@ public class TaskItem {
 
     public static Intent packageIntent(String title, String comment, Status status, String date, String time) {
         Intent data = new Intent();
-        if (title == null) {
-            data.putExtra(TaskItem.TITLE, "Task");
-        } else {
-            data.putExtra(TaskItem.TITLE, title);
-        }
+        data.putExtra(TaskItem.TITLE, title);
         data.putExtra(TaskItem.STATUS, status.toString());
         data.putExtra(TaskItem.DATE, date);
         data.putExtra(TaskItem.COMMENT, comment);

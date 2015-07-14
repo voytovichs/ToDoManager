@@ -93,7 +93,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.add_task_menu_done: {
-                if (titleText == null) {
+                if (titleText == null || titleText.equals("")) {
                     titleText = "Task";
                 }
                 if (timeString == null) {
@@ -101,6 +101,9 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
                 }
                 if (descriptionText == null) {
                     descriptionText = "";
+                }
+                if (dateString == null) {
+                    dateString = "01.01.2000";
                 }
                 setResult(RESULT_OK, TaskItem.packageIntent(titleText, descriptionText, TaskItem.Status.INCOMPLETED, dateString, timeString));
                 finish();
