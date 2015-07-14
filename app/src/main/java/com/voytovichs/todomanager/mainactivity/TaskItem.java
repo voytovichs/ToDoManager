@@ -32,7 +32,7 @@ public class TaskItem {
     private String mComment;
 
     //@DatabaseField(canBeNull = false, dataType = DataType.ENUM, columnName = STATUS)
-    private Status mStatus;
+    private Status mStatus = Status.INCOMPLETED;
 
     @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = DATE)
     private String mDate;

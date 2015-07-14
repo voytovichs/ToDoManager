@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -16,25 +17,20 @@ import android.widget.ListView;
 
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.AddTaskItemActivity;
+import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
 import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
 import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
 
 public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int BUTTON_ICON_SIZE = 70;
     private static final int ADD_TODO_ITEM_REQUEST = 1;
-    private static final String FILE_NAME = "ToDoData.txt";
+    private TaskDAO taskDAO;
 
 
     private ListViewAdapter mAdapter;
@@ -52,6 +48,12 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getScreenHeight());
         list.setLayoutParams(mParam);
         setFloatingButton();
+
+        try {
+            taskDAO = TaskHelperFactory.getHelper().getTaskDAO();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setFloatingButton() {
@@ -95,56 +97,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         saveItems();
-
     }
 
     private void saveItems() {
-        PrintWriter writer = null;
-        try {
-            FileOutputStream fos = openFileOutput(FILE_NAME, MODE_PRIVATE);
-            writer = new PrintWriter(new BufferedWriter(new OutputStreamWriter(fos)));
-            for (int i = mAdapter.getCount() - 1; i >= 0; i--) {
-                writer.println(mAdapter.getItem(i));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (writer != null) {
-                writer.close();
+        for (int i = 0; i < mAdapter.getCount(); i--) {
+            try {
+                Log.d(TAG, "Adding task " + mAdapter.getItem(i));
+                taskDAO.createIfNotExists(mAdapter.getItem(i));
+            } catch (SQLException e) {
+                Log.e(TAG, "Couldn't save task to database: " + e);
             }
         }
     }
 
     private void loadItems() {
-        BufferedReader reader = null;
+        mAdapter.clear();
         try {
-            FileInputStream fis = openFileInput(FILE_NAME);
-            reader = new BufferedReader(new InputStreamReader(fis));
-
-            String title;
-            String status;
-            String date;
-            String time;
-            String description;
-
-            while (null != (title = reader.readLine())) {
-                description = reader.readLine();
-                status = reader.readLine();
-                date = reader.readLine();
-                time = reader.readLine();
-                mAdapter.add(new TaskItem(title, description, status, date, time));
+            for (TaskItem taskItem: taskDAO.queryForAll()) {
+                Log.d(TAG, "Loading task " + taskItem);
+                mAdapter.add(taskItem);
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (null != reader) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (SQLException e) {
+            Log.e(TAG, "Couldn't load tasks: " + e);
         }
     }
 

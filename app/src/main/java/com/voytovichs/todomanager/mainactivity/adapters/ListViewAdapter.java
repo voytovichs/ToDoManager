@@ -30,6 +30,10 @@ public class ListViewAdapter extends BaseAdapter {
         mData = new LinkedList<>();
     }
 
+    public void clear() {
+        mData.clear();
+    }
+
     public void add(TaskItem item) {
         mData.add(0, item);
         notifyDataSetChanged();
@@ -46,7 +50,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int position) {
+    public TaskItem getItem(int position) {
         return mData.get(position);
     }
 
@@ -105,5 +109,4 @@ public class ListViewAdapter extends BaseAdapter {
         });
         return itemLayout;
     }
-
 }
