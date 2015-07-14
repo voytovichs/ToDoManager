@@ -25,19 +25,19 @@ public class TaskItem {
     @DatabaseField(generatedId = true)
     private int id;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "title")
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = TITLE)
     private String mTitle;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "comment")
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = COMMENT)
     private String mComment;
 
-    //@DatabaseField(canBeNull = false, dataType = DataType.ENUM, columnName = "status")
+    //@DatabaseField(canBeNull = false, dataType = DataType.ENUM, columnName = STATUS)
     private Status mStatus = Status.INCOMPLETED;
 
-    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "date")
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = DATE)
     private String mDate = "";
 
-    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = "time")
+    @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = TIME)
     private String mTime = "";
 
     public TaskItem() {
