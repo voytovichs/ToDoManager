@@ -38,19 +38,10 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     private String descriptionText = null;
     private String dateString = null;
     private String timeString = null;
-    private TaskDAO taskDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        try {
-            taskDAO = TaskHelperFactory.getHelper().getTaskDAO();
-            // Now you can call taskDao.create(taskItem) to add taskItem to database (but I didn't
-            // test it properly, so I don't guarantee that it works).
-        } catch (SQLException e) {
-            Log.e(TAG, "Couldn't load DAO for tasks");
-        }
 
         setContentView(R.layout.add_task_activity_layout);
 

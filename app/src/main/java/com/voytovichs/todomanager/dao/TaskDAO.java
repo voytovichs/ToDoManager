@@ -14,5 +14,8 @@ public class TaskDAO extends BaseDaoImpl<TaskItem, Integer> {
         super(connectionSource, dataClass);
     }
 
-    
+    @Override
+    public int create(TaskItem data) throws SQLException {
+        return super.create(data);
+    }
 }

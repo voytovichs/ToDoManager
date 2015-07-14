@@ -31,7 +31,7 @@ public class TaskItem {
     @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = COMMENT)
     private String mComment;
 
-    //@DatabaseField(canBeNull = false, dataType = DataType.ENUM, columnName = STATUS)
+    @DatabaseField(canBeNull = false, columnName = STATUS)
     private Status mStatus;
 
     @DatabaseField(canBeNull = false, dataType = DataType.STRING, columnName = DATE)
