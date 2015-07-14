@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveItems() {
-        for (int i = 0; i < mAdapter.getCount(); i--) {
+        for (int i = 0; i < mAdapter.getCount(); i++) {
             try {
                 Log.d(TAG, "Adding task " + mAdapter.getItem(i));
-                taskDAO.createIfNotExists(mAdapter.getItem(i));
+                taskDAO.createOrUpdate(mAdapter.getItem(i));
             } catch (SQLException e) {
                 Log.e(TAG, "Couldn't save task to database: " + e);
             }
