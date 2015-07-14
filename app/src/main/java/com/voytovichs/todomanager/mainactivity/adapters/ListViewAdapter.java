@@ -35,6 +35,11 @@ public class ListViewAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void delete(int position) {
+        mData.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return mData.size();
