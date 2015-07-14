@@ -31,7 +31,7 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public void add(TaskItem item) {
-        mData.add(item);
+        mData.add(0, item);
         notifyDataSetChanged();
     }
 
@@ -57,7 +57,7 @@ public class ListViewAdapter extends BaseAdapter {
         final TaskItem taskItem = mData.get(position);
 
         LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        LinearLayout itemLayout = (LinearLayout) mInflater.inflate(R.layout.list_item, null);
+        final LinearLayout itemLayout = (LinearLayout) mInflater.inflate(R.layout.list_item, null);
 
         final TextView titleView = (TextView) itemLayout.findViewById(R.id.listTitle);
         titleView.setText(taskItem.getTitle());
@@ -82,13 +82,19 @@ public class ListViewAdapter extends BaseAdapter {
         timeView.setText(taskItem.getTime());
 
         final TextView commentView = (TextView) itemLayout.findViewById(R.id.listDescription);
+        commentView.setText(taskItem.getComment());
+        commentView.setVisibility(View.GONE);
+
         itemLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (commentView.getText().equals("")) {
-                    commentView.setText(taskItem.getComment());
+                    return;
+                }
+                if (commentView.isShown()) {
+                    commentView.setVisibility(View.GONE);
                 } else {
-                    commentView.setText("");
+                    commentView.setVisibility(View.VISIBLE);
                 }
             }
         });

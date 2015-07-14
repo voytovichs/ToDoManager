@@ -14,6 +14,9 @@ import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private CharSequence mTitles[]; // This will Store the Titles of the Tabs which are Going to be passed when ViewPagerAdapter is created
+    private final TimeTabFragment timeTab = new TimeTabFragment();
+    private final NameTabFragment nameTab = new NameTabFragment();
+    private final CalendarTabFragment calendarTab = new CalendarTabFragment();
 
     public ViewPagerAdapter(FragmentManager fm, CharSequence titles[]) {
         super(fm);
@@ -25,13 +28,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0: {
-                return new NameTabFragment();
+                return nameTab;
             }
             case 1: {
-                return new CalendarTabFragment();
+                return calendarTab;
             }
             case 2: {
-                return new TimeTabFragment();
+                return timeTab;
             }
             default: {
                 throw new IllegalArgumentException("Wrong tab number: " + position);

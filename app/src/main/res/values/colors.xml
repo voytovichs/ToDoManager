@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryColor">#e53935</color>
-    <color name="primaryColorDark">#d32f2f</color>
+    <color name="primaryColorDark">#d02f2f</color>
     <color name="textColorPrimary">#dddddd</color>
     <color name="tabsScrollColor">#8a140e</color>
     <color name="accentColor">#d32f2f</color>
     <color name="textColor">#e53935</color>
-    <color name="secondaryText">#505050</color>
+    <color name="secondaryTextColor">#505050</color>
     <color name="hintTextColor">#a0a0a0</color>
     <color name="buttonColor">#dddddd</color>
 </resources>

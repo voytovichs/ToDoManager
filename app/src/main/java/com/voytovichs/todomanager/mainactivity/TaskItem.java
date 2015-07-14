@@ -41,7 +41,6 @@ public class TaskItem {
     private String mTime = "";
 
     public TaskItem() {
-
     }
 
     public TaskItem(String tittle, String comment, String status, String date, String time) {
@@ -72,7 +71,11 @@ public class TaskItem {
 
     public static Intent packageIntent(String title, String comment, Status status, String date, String time) {
         Intent data = new Intent();
-        data.putExtra(TaskItem.TITLE, title);
+        if (title == null) {
+            data.putExtra(TaskItem.TITLE, "Task");
+        } else {
+            data.putExtra(TaskItem.TITLE, title);
+        }
         data.putExtra(TaskItem.STATUS, status.toString());
         data.putExtra(TaskItem.DATE, date);
         data.putExtra(TaskItem.COMMENT, comment);
@@ -92,18 +95,12 @@ public class TaskItem {
         mStatus = status;
     }
 
-
     public String getDate() {
         return mDate;
     }
 
     public String getComment() {
         return mComment;
-    }
-
-
-    public void setDate(String date) {
-        mDate = date;
     }
 
     public String getTime() {

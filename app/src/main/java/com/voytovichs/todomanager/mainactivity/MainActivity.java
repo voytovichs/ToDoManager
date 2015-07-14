@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         Drawable buttonIcon = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, BUTTON_ICON_SIZE, BUTTON_ICON_SIZE, true));
         FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
                 .withDrawable(buttonIcon)
-                .withButtonColor(getResources().getColor(R.color.primaryColor))
+                .withButtonColor(getResources().getColor(R.color.primaryColorDark))
                 .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 .withMargins(0, 0, 16, 16)
                 .create();
@@ -116,14 +116,13 @@ public class MainActivity extends AppCompatActivity {
             FileInputStream fis = openFileInput(FILE_NAME);
             reader = new BufferedReader(new InputStreamReader(fis));
 
-            String title = null;
-            String status = null;
-            String date = null;
-            String time = null;
-            String description = null;
+            String title;
+            String status;
+            String date;
+            String time;
+            String description;
 
             while (null != (title = reader.readLine())) {
-                //  title = reader.readLine();
                 description = reader.readLine();
                 status = reader.readLine();
                 date = reader.readLine();

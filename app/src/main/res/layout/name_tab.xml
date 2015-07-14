@@ -30,7 +30,7 @@
         android:imeOptions="actionDone"
         android:inputType="textAutoComplete|textAutoCorrect"
         android:password="false"
-        android:textColor="@color/secondaryText"
+        android:textColor="@color/secondaryTextColor"
         android:textColorHighlight="@color/primaryColor"
         android:textColorHint="@color/hintTextColor"
         android:textIsSelectable="true"
@@ -74,7 +74,7 @@
                 android:inputType="textAutoCorrect|textCapSentences|textMultiLine"
                 android:linksClickable="false"
                 android:password="false"
-                android:textColor="@color/secondaryText"
+                android:textColor="@color/secondaryTextColor"
                 android:textColorHighlight="@color/primaryColor"
                 android:textColorHint="@color/hintTextColor"
                 android:theme="@style/AppTheme" />
