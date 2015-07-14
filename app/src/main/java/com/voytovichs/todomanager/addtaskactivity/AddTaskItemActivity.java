@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,11 +13,7 @@ import com.voytovichs.todomanager.addtaskactivity.fragments.CalendarTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
-import com.voytovichs.todomanager.dao.TaskDAO;
-import com.voytovichs.todomanager.dao.TaskHelperFactory;
 import com.voytovichs.todomanager.mainactivity.TaskItem;
-
-import java.sql.SQLException;
 
 /**
  * Created by voytovichs on 05.07.15.

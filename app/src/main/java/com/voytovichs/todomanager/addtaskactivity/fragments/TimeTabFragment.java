@@ -50,7 +50,11 @@ public class TimeTabFragment extends android.support.v4.app.Fragment {
     }
 
     private String timeToString(int hour, int minutes) {
-        return hour + ":" + minutes;
+        String stringMinutes = String.valueOf(minutes);
+        if (minutes < 10) {
+            stringMinutes = "0" + stringMinutes;
+        }
+        return hour + ":" + stringMinutes;
     }
 
     private void setTimePicker(View mainView) {
