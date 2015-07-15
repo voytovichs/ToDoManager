@@ -81,7 +81,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
         switch (item.getItemId()) {
             case R.id.add_task_menu_done: {
                 if (titleText == null || titleText.equals("")) {
-                    titleText = "Task";
+                    titleText = getResources().getString(R.string.no_title_string);
                 }
                 if (timeString == null) {
                     timeString = "00:00";
