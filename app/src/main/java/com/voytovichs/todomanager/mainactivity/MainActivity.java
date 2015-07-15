@@ -133,4 +133,13 @@ public class MainActivity extends AppCompatActivity implements editableElements 
     public void editElement(int position) {
         addNewElement(position);
     }
+
+    @Override
+    public void deleteFromDB(int position) {
+        try {
+            taskDAO.delete(mAdapter.getItem(position));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

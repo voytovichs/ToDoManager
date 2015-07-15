@@ -24,6 +24,8 @@ public class ListViewAdapter extends BaseAdapter {
 
     public interface editableElements {
         void editElement(int position);
+
+        void deleteFromDB(int position);
     }
 
     private final Context mContext;
@@ -56,7 +58,9 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public void delete(int position) {
+        activity.deleteFromDB(position);
         mData.remove(position);
+
         notifyDataSetChanged();
     }
 
