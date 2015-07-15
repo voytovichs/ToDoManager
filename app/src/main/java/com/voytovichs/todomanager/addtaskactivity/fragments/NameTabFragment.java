@@ -36,7 +36,6 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
         View view = inflater.inflate(R.layout.name_tab, container, false);
         setTitleEditText(view);
         setDescriptionEditText(view);
-
         return view;
     }
 
