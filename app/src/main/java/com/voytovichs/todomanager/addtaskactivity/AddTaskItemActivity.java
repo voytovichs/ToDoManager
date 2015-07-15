@@ -76,6 +76,7 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        mViewPagerAdapter.closeInputs();
         switch (item.getItemId()) {
             case R.id.add_task_menu_done: {
                 if (titleText == null || titleText.equals("")) {

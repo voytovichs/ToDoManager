@@ -51,4 +51,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return mTitles.length;
     }
+
+    public void closeInputs() {
+        nameTab.closeInputs();
+    }
 }

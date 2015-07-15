@@ -54,67 +54,67 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     }
 
     private void setTitleEditText(final View mainView) {
-        final EditText editText = (EditText) mainView.findViewById(R.id.taskTitleTextEdit);
-        editText.setOnClickListener(new View.OnClickListener() {
+        mTitle = (EditText) mainView.findViewById(R.id.taskTitleTextEdit);
+        mTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showKeyboard(editText);
+                showKeyboard(mTitle);
             }
         });
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mTitle.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    hideKeyboard(editText);
-                    mCallback.sendTitleText(editText.getText().toString());
+                    hideKeyboard(mTitle);
+                    mCallback.sendTitleText(mTitle.getText().toString());
                 }
             }
         });
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mTitle.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    mCallback.sendTitleText(editText.getText().toString());
-                    hideKeyboard(editText);
+                    mCallback.sendTitleText(mTitle.getText().toString());
+                    hideKeyboard(mTitle);
                     return true;
                 }
                 return false;
             }
         });
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        hideKeyboard(editText);
+        mTitle.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        hideKeyboard(mTitle);
     }
 
     private void setDescriptionEditText(final View mainView) {
-        final EditText editText = (EditText) mainView.findViewById(R.id.taskDescriptionTextEdit);
-        editText.setOnClickListener(new View.OnClickListener() {
+        mComment = (EditText) mainView.findViewById(R.id.taskDescriptionTextEdit);
+        mComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showKeyboard(editText);
+                showKeyboard(mComment);
             }
         });
-        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mComment.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    hideKeyboard(editText);
-                    mCallback.sendCommentText(editText.getText().toString());
+                    hideKeyboard(mComment);
+                    mCallback.sendCommentText(mComment.getText().toString());
                 }
             }
         });
-        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mComment.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     mCallback.sendCommentText(
-                            editText.getText().toString());
-                    hideKeyboard(editText);
+                            mComment.getText().toString());
+                    hideKeyboard(mComment);
                     return true;
                 }
                 return false;
             }
         });
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        mComment.setImeOptions(EditorInfo.IME_ACTION_DONE);
     }
 
     private void showKeyboard(EditText editText) {
@@ -125,5 +125,10 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     private void hideKeyboard(EditText editText) {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
+    }
+
+    public void closeInputs() {
+        mCallback.sendTitleText(mTitle.getText().toString());
+        mCallback.sendCommentText(mComment.getText().toString());
     }
 }
