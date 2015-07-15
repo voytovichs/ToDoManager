@@ -84,13 +84,13 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
                     titleText = getResources().getString(R.string.no_title_string);
                 }
                 if (timeString == null) {
-                    timeString = "00:00";
+                    timeString = getResources().getString(R.string.no_time_string);
                 }
                 if (descriptionText == null) {
-                    descriptionText = "";
+                    descriptionText = getResources().getString(R.string.no_description_string);
                 }
                 if (dateString == null) {
-                    dateString = "01.01.2000";
+                    dateString = getResources().getString(R.string.no_date_string);
                 }
                 setResult(RESULT_OK, TaskItem.packageIntent(titleText, descriptionText, TaskItem.Status.INCOMPLETED, dateString, timeString));
                 finish();
