@@ -1,13 +1,11 @@
 package com.voytovichs.todomanager.addtaskactivity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.InputMethodManager;
 
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
@@ -120,10 +118,4 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
     public void sendTime(String timeString) {
         this.timeString = timeString;
     }
-
-    private void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
-    }
-
 }

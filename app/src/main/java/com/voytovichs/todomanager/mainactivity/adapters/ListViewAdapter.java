@@ -22,12 +22,23 @@ import java.util.List;
  */
 public class ListViewAdapter extends BaseAdapter {
 
+    public interface editableElements {
+        void editElement(int position);
+    }
+
     private final Context mContext;
     private final List<TaskItem> mData;
+    private final editableElements activity;
 
     public ListViewAdapter(Context context) {
         mContext = context;
         mData = new LinkedList<>();
+        try {
+            this.activity = (editableElements) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString()
+                    + " must implement editableElements");
+        }
     }
 
     public void clear() {
@@ -36,6 +47,11 @@ public class ListViewAdapter extends BaseAdapter {
 
     public void add(TaskItem item) {
         mData.add(0, item);
+        notifyDataSetChanged();
+    }
+
+    public void add(int position, TaskItem item) {
+        mData.add(position, item);
         notifyDataSetChanged();
     }
 
@@ -61,7 +77,7 @@ public class ListViewAdapter extends BaseAdapter {
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         final TaskItem taskItem = mData.get(position);
 
@@ -105,6 +121,15 @@ public class ListViewAdapter extends BaseAdapter {
                 } else {
                     commentView.setVisibility(View.VISIBLE);
                 }
+            }
+        });
+
+        itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                delete(position);
+                activity.editElement(position);
+                return true;
             }
         });
         return itemLayout;

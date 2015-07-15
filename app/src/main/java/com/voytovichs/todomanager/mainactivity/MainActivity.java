@@ -18,17 +18,19 @@ import com.voytovichs.todomanager.addtaskactivity.AddTaskItemActivity;
 import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
 import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
+import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter.editableElements;
 import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
 
 import java.sql.SQLException;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements editableElements {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int BUTTON_ICON_SIZE = 70;
     private static final int ADD_TODO_ITEM_REQUEST = 1;
     private TaskDAO taskDAO;
+    private FloatingActionButton mButton;
 
 
     private ListViewAdapter mAdapter;
@@ -59,19 +61,23 @@ public class MainActivity extends AppCompatActivity {
         Drawable dr = getResources().getDrawable(R.drawable.add_button);
         Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
         Drawable buttonIcon = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, BUTTON_ICON_SIZE, BUTTON_ICON_SIZE, true));
-        FloatingActionButton fabButton = new FloatingActionButton.Builder(this)
+        mButton = new FloatingActionButton.Builder(this)
                 .withDrawable(buttonIcon)
                 .withButtonColor(getResources().getColor(R.color.primaryColorDark))
                 .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 .withMargins(0, 0, 16, 16)
                 .create();
-        fabButton.setOnClickListener(new View.OnClickListener() {
+        mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toDoIntent = new Intent(MainActivity.this, AddTaskItemActivity.class);
-                startActivityForResult(toDoIntent, ADD_TODO_ITEM_REQUEST);
+                addNewElement(ADD_TODO_ITEM_REQUEST);
             }
         });
+    }
+
+    private void addNewElement(int finalPosition) {
+        Intent toDoIntent = new Intent(MainActivity.this, AddTaskItemActivity.class);
+        startActivityForResult(toDoIntent, finalPosition);
     }
 
     @Override
@@ -80,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ADD_TODO_ITEM_REQUEST && resultCode == RESULT_OK) {
             TaskItem item = new TaskItem(data);
             mAdapter.add(item);
+        } else if (resultCode == RESULT_OK) {
+            TaskItem item = new TaskItem(data);
+            mAdapter.add(requestCode, item);
         }
     }
 
@@ -111,12 +120,17 @@ public class MainActivity extends AppCompatActivity {
     private void loadItems() {
         mAdapter.clear();
         try {
-            for (TaskItem taskItem: taskDAO.queryForAll()) {
+            for (TaskItem taskItem : taskDAO.queryForAll()) {
                 Log.d(TAG, "Loading task " + taskItem);
                 mAdapter.add(taskItem);
             }
         } catch (SQLException e) {
             Log.e(TAG, "Couldn't load tasks: " + e);
         }
+    }
+
+    @Override
+    public void editElement(int position) {
+        addNewElement(position);
     }
 }
