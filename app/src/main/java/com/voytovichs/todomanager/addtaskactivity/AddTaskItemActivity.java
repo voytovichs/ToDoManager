@@ -14,6 +14,7 @@ import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
 import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
 import com.voytovichs.todomanager.mainactivity.TaskItem;
+import com.voytovichs.todomanager.mainactivity.TaskItem.Status;
 
 /**
  * Created by voytovichs on 05.07.15.
@@ -91,7 +92,11 @@ public class AddTaskItemActivity extends AppCompatActivity implements NameTabFra
                 if (dateString == null) {
                     dateString = getResources().getString(R.string.no_date_string);
                 }
-                setResult(RESULT_OK, TaskItem.packageIntent(titleText, descriptionText, TaskItem.Status.INCOMPLETED, dateString, timeString));
+                Status status = Status.INCOMPLETED;
+                if (getIntent().hasExtra(TaskItem.STATUS)) {
+                    status = Status.valueOf(getIntent().getStringExtra(TaskItem.STATUS));
+                }
+                setResult(RESULT_OK, TaskItem.packageIntent(titleText, descriptionText, status, dateString, timeString));
                 finish();
                 return true;
             }

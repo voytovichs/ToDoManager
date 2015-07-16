@@ -2,6 +2,7 @@ package com.voytovichs.todomanager.addtaskactivity.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
@@ -14,15 +15,21 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.voytovichs.todomanager.R;
+import com.voytovichs.todomanager.mainactivity.TaskItem;
+
+import java.util.Objects;
 
 /**
  * Created by voytovichs on 08.07.15.
  */
 public class NameTabFragment extends android.support.v4.app.Fragment {
 
-    MainPageItemsListener mCallback;
-    EditText mTitle = null;
-    EditText mComment = null;
+    private MainPageItemsListener mCallback;
+    private EditText mTitle = null;
+    private EditText mComment = null;
+
+    private String titleFromActivity = "";
+    private String commentFromActivity = "";
 
     // Container Activity must implement this interface
     public interface MainPageItemsListener {
@@ -42,7 +49,6 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
@@ -51,10 +57,22 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement MainPageItemsListener");
         }
+
+        Intent dataIntent = activity.getIntent();
+        if (dataIntent.hasExtra(TaskItem.TITLE)) {
+            titleFromActivity = dataIntent.getStringExtra(TaskItem.TITLE);
+        }
+        if (dataIntent.hasExtra(TaskItem.COMMENT)) {
+            commentFromActivity = dataIntent.getStringExtra(TaskItem.COMMENT);
+        }
     }
 
     private void setTitleEditText(final View mainView) {
         mTitle = (EditText) mainView.findViewById(R.id.taskTitleTextEdit);
+        if (!Objects.equals(titleFromActivity, "")) {
+            mTitle.setText(titleFromActivity);
+            mCallback.sendTitleText(titleFromActivity);
+        }
         mTitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +105,10 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
 
     private void setDescriptionEditText(final View mainView) {
         mComment = (EditText) mainView.findViewById(R.id.taskDescriptionTextEdit);
+        if (!Objects.equals(commentFromActivity, "")) {
+            mComment.setText(commentFromActivity);
+            mCallback.sendCommentText(commentFromActivity);
+        }
         mComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

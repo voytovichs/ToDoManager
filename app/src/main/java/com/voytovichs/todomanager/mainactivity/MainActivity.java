@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,9 +29,8 @@ public class MainActivity extends AppCompatActivity implements editableElements 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int BUTTON_ICON_SIZE = 70;
-    private static final int ADD_TODO_ITEM_REQUEST = 1;
+    private static final int ADD_TODO_ITEM_REQUEST = 0;
     private TaskDAO taskDAO;
-    private FloatingActionButton mButton;
 
 
     private ListViewAdapter mAdapter;
@@ -58,25 +58,31 @@ public class MainActivity extends AppCompatActivity implements editableElements 
 
     private void setFloatingButton() {
 
-        Drawable dr = getResources().getDrawable(R.drawable.add_button);
+        Drawable dr = getDrawable(R.drawable.add_button);
+        assert dr != null;
         Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
         Drawable buttonIcon = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, BUTTON_ICON_SIZE, BUTTON_ICON_SIZE, true));
-        mButton = new FloatingActionButton.Builder(this)
+
+        FloatingActionButton mButton = new FloatingActionButton.Builder(this)
                 .withDrawable(buttonIcon)
                 .withButtonColor(getResources().getColor(R.color.primaryColorDark))
                 .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 .withMargins(0, 0, 16, 16)
                 .create();
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addNewElement(ADD_TODO_ITEM_REQUEST);
+                addNewElement(ADD_TODO_ITEM_REQUEST, null);
             }
         });
     }
 
-    private void addNewElement(int finalPosition) {
+    private void addNewElement(int finalPosition, @Nullable TaskItem toDoItem) {
         Intent toDoIntent = new Intent(MainActivity.this, AddTaskItemActivity.class);
+        if (toDoItem != null) {
+            TaskItem.packageIntent(toDoIntent, toDoItem);
+        }
         startActivityForResult(toDoIntent, finalPosition);
     }
 
@@ -107,7 +113,13 @@ public class MainActivity extends AppCompatActivity implements editableElements 
     }
 
     private void saveItems() {
-        for (int i = 0; i < mAdapter.getCount(); i++) {
+
+        try {
+            taskDAO.delete(mAdapter.getCollection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        for (int i = mAdapter.getCount() - 1; i >= 0; i--) {
             try {
                 Log.d(TAG, "Adding task " + mAdapter.getItem(i));
                 taskDAO.createOrUpdate(mAdapter.getItem(i));
@@ -131,15 +143,13 @@ public class MainActivity extends AppCompatActivity implements editableElements 
 
     @Override
     public void editElement(int position) {
-        addNewElement(position);
-    }
-
-    @Override
-    public void deleteFromDB(int position) {
+        TaskItem toEditItem = mAdapter.getItem(position);
+        mAdapter.delete(position);
         try {
-            taskDAO.delete(mAdapter.getItem(position));
+            taskDAO.delete(toEditItem);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        addNewElement(position, toEditItem);
     }
 }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.mainactivity.TaskItem;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,8 +25,6 @@ public class ListViewAdapter extends BaseAdapter {
 
     public interface editableElements {
         void editElement(int position);
-
-        void deleteFromDB(int position);
     }
 
     private final Context mContext;
@@ -58,10 +57,14 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public void delete(int position) {
-        activity.deleteFromDB(position);
+        //  activity.deleteFromDB(position);
         mData.remove(position);
 
         notifyDataSetChanged();
+    }
+
+    public Collection<TaskItem> getCollection() {
+        return mData;
     }
 
     @Override
@@ -131,7 +134,6 @@ public class ListViewAdapter extends BaseAdapter {
         itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                delete(position);
                 activity.editElement(position);
                 return true;
             }

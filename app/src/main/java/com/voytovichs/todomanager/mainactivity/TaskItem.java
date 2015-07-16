@@ -14,11 +14,11 @@ public class TaskItem {
 
     public enum Status {COMPLETED, INCOMPLETED}
 
-    private final static String TITLE = "title";
-    private final static String STATUS = "status";
-    private final static String DATE = "date";
-    private final static String TIME = "time";
-    private final static String COMMENT = "comment";
+    public final static String TITLE = "title";
+    public final static String STATUS = "status";
+    public final static String DATE = "date";
+    public final static String TIME = "time";
+    public final static String COMMENT = "comment";
 
     // public final static SimpleDateFormat FORMAT = new SimpleDateFormat("dd-MM-yyyy h:mm a", Locale.ENGLISH);
 
@@ -69,7 +69,7 @@ public class TaskItem {
         mComment = intent.getStringExtra(TaskItem.COMMENT);
         mDate = intent.getStringExtra(TaskItem.DATE);
         mTime = intent.getStringExtra(TaskItem.TIME);
-        this.mStatus = Status.INCOMPLETED;
+        mStatus = Status.valueOf(intent.getStringExtra(TaskItem.STATUS));
     }
 
     public static Intent packageIntent(String title, String comment, Status status, String date, String time) {
@@ -80,6 +80,14 @@ public class TaskItem {
         data.putExtra(TaskItem.COMMENT, comment);
         data.putExtra(TaskItem.TIME, time);
         return data;
+    }
+
+    public static void packageIntent(Intent intent, TaskItem item) {
+        intent.putExtra(TaskItem.TITLE, item.getTitle());
+        intent.putExtra(TaskItem.STATUS, item.getStatus().toString());
+        intent.putExtra(TaskItem.DATE, item.getDate());
+        intent.putExtra(TaskItem.COMMENT, item.getComment());
+        intent.putExtra(TaskItem.TIME, item.getTime());
     }
 
     public String getTitle() {
