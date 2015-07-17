@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.mainactivity.TaskItem;
 
@@ -89,7 +89,7 @@ public class ListViewAdapter extends BaseAdapter {
         final TaskItem taskItem = mData.get(position);
 
         LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        final LinearLayout itemLayout = (LinearLayout) mInflater.inflate(R.layout.list_item, null);
+        final SwipeLayout itemLayout = (SwipeLayout) mInflater.inflate(R.layout.list_item, null);
 
         final TextView titleView = (TextView) itemLayout.findViewById(R.id.listTitle);
         titleView.setText(taskItem.getTitle());
@@ -131,13 +131,13 @@ public class ListViewAdapter extends BaseAdapter {
             }
         });
 
-        itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
+       /* itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 activity.editElement(position);
                 return true;
             }
-        });
+        });*/
         return itemLayout;
     }
 }
