@@ -7,7 +7,7 @@
     <!--Bottom view start-->
     <LinearLayout
         android:id="@+id/bottom_wrapper"
-        android:layout_width="40dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
         android:orientation="horizontal"

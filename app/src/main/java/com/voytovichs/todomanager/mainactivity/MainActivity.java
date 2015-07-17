@@ -22,13 +22,12 @@ import com.voytovichs.todomanager.addtaskactivity.AddTaskItemActivity;
 import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
 import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
-import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter.editableElements;
 import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
 
 import java.sql.SQLException;
 
 
-public class MainActivity extends AppCompatActivity implements editableElements {
+public class MainActivity extends AppCompatActivity implements ListViewAdapter.editableElements {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int BUTTON_ICON_SIZE = 70;
@@ -46,9 +45,9 @@ public class MainActivity extends AppCompatActivity implements editableElements 
         ListView list = (ListView) findViewById(R.id.listView);
         mAdapter = new ListViewAdapter(this);
         list.setAdapter(mAdapter);
-        setSwipeLayout();
         LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         list.setLayoutParams(mParam);
+        setSwipeLayout();
         setFloatingButton();
 
         try {
@@ -176,9 +175,11 @@ public class MainActivity extends AppCompatActivity implements editableElements 
 
             @Override
             public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-                //when user's hand released.
+
             }
         });
+
+        //final TextView commentView = (TextView) swipeLayout.findViewById(R.id.listDescription);
     }
 
     @Override
