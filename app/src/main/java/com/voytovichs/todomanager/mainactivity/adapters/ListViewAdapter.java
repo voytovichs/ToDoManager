@@ -25,6 +25,8 @@ public class ListViewAdapter extends BaseAdapter {
 
     public interface editableElements {
         void editElement(int position);
+
+        void deleteElement(int position);
     }
 
     private final Context mContext;
@@ -57,7 +59,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public void delete(int position) {
-        //  activity.deleteFromDB(position);
+        //Don't touch the order!
+        activity.deleteElement(position);
         mData.remove(position);
 
         notifyDataSetChanged();
@@ -101,6 +104,7 @@ public class ListViewAdapter extends BaseAdapter {
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
                 //you are swiping.
+
             }
 
             @Override
@@ -111,6 +115,7 @@ public class ListViewAdapter extends BaseAdapter {
             @Override
             public void onOpen(SwipeLayout layout) {
                 //when the BottomView totally show.
+                delete(position);
             }
 
             @Override

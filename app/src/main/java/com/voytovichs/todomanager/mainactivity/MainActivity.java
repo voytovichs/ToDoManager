@@ -148,4 +148,14 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
         }
         addNewElement(position, toEditItem);
     }
+
+    @Override
+    public void deleteElement(int position) {
+        TaskItem toEditItem = mAdapter.getItem(position);
+        try {
+            taskDAO.delete(toEditItem);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
