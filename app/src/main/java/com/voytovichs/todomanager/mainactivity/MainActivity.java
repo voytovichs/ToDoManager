@@ -1,6 +1,5 @@
 package com.voytovichs.todomanager.mainactivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -10,13 +9,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.daimajia.swipe.SwipeLayout;
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.addtaskactivity.AddTaskItemActivity;
 import com.voytovichs.todomanager.dao.TaskDAO;
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
         list.setAdapter(mAdapter);
         LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         list.setLayoutParams(mParam);
-        setSwipeLayout();
         setFloatingButton();
 
         try {
@@ -141,47 +137,6 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
             Log.e(TAG, "Couldn't load tasks: " + e);
         }
     }
-
-    private void setSwipeLayout() {
-        LayoutInflater mInflater = (LayoutInflater) getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        SwipeLayout swipeLayout = (SwipeLayout) mInflater.inflate(R.layout.list_item, null);
-        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-        swipeLayout.addDrag(SwipeLayout.DragEdge.Top, findViewById(R.id.bottom_wrapper));
-        swipeLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
-            @Override
-            public void onClose(SwipeLayout layout) {
-                //when the SurfaceView totally cover the BottomView.
-            }
-
-            @Override
-            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-                //you are swiping.
-            }
-
-            @Override
-            public void onStartOpen(SwipeLayout layout) {
-
-            }
-
-            @Override
-            public void onOpen(SwipeLayout layout) {
-                //when the BottomView totally show.
-            }
-
-            @Override
-            public void onStartClose(SwipeLayout layout) {
-
-            }
-
-            @Override
-            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
-
-            }
-        });
-
-        //final TextView commentView = (TextView) swipeLayout.findViewById(R.id.listDescription);
-    }
-
     @Override
     public void editElement(int position) {
         TaskItem toEditItem = mAdapter.getItem(position);

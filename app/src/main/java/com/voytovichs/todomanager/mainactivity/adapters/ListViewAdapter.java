@@ -90,6 +90,39 @@ public class ListViewAdapter extends BaseAdapter {
 
         LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         final SwipeLayout itemLayout = (SwipeLayout) mInflater.inflate(R.layout.list_item, null);
+        itemLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+        itemLayout.addDrag(SwipeLayout.DragEdge.Top, itemLayout.findViewById(R.id.bottom_wrapper));
+        itemLayout.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onClose(SwipeLayout layout) {
+                //when the SurfaceView totally cover the BottomView.
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                //you are swiping.
+            }
+
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                //when the BottomView totally show.
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout layout, float xvel, float yvel) {
+
+            }
+        });
 
         final TextView titleView = (TextView) itemLayout.findViewById(R.id.listTitle);
         titleView.setText(taskItem.getTitle());
