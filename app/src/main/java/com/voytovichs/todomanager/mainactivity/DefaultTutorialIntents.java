@@ -15,20 +15,20 @@ public class DefaultTutorialIntents {
         List<Intent> list = new ArrayList<>();
 
         Intent deleteIntent = new Intent();
-        deleteIntent.putExtra(TaskItem.TITLE, "Swipe direction to delete");
-        deleteIntent.putExtra(TaskItem.COMMENT, "That's it!");
+        deleteIntent.putExtra(TaskItem.TITLE, "Swipe to delete");
+        deleteIntent.putExtra(TaskItem.COMMENT, "These are all you need to know");
         setDefaultParameters(deleteIntent);
         list.add(deleteIntent);
 
         Intent editIntent = new Intent();
         editIntent.putExtra(TaskItem.TITLE, "Touch a bit longer to edit task");
-        editIntent.putExtra(TaskItem.COMMENT, "No, touch longer!");
+        editIntent.putExtra(TaskItem.COMMENT, "You do it wrong \n Touch longer!");
         setDefaultParameters(editIntent);
         list.add(editIntent);
 
         Intent commentIntent = new Intent();
-        commentIntent.putExtra(TaskItem.TITLE, "Touch to see comments");
-        commentIntent.putExtra(TaskItem.COMMENT, "That is a description!");
+        commentIntent.putExtra(TaskItem.TITLE, "Touch to see a description");
+        commentIntent.putExtra(TaskItem.COMMENT, "This is a description!");
         setDefaultParameters(commentIntent);
         list.add(commentIntent);
 
