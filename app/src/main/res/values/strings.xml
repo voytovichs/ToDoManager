@@ -8,6 +8,6 @@
     <string name="menu_done">Done</string>
     <string name="no_title_string">Do something mysterious</string>
     <string name="no_description_string"></string>
-    <string name="no_time_string">00:00</string>
-    <string name="no_date_string">01.01.2015</string>
+    <string name="no_time_string">23:59</string>
+    <string name="no_date_string">30.11.2016</string>
 </resources>
