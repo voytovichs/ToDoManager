@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--red-->
-    <!-- <color name="primaryColor">#e53935</color>
-     <color name="primaryColorDark">#d02f2f</color>
-     <color name="tabsScrollColor">#8a140e</color>
-     <color name="accentColor">#d32f2f</color>
-     <color name="textColor">#e53935</color>-->
+ <!--red-->
+ <!-- <color name="primaryColor">#e53935</color>
+  <color name="primaryColorDark">#d02f2f</color>
+  <color name="tabsScrollColor">#8a140e</color>
+  <color name="accentColor">#d32f2f</color>
+  <color name="textColor">#e53935</color>-->
 
-    <!--blue-->
-    <color name="primaryColor">#2196F3</color>
-    <color name="primaryColorDark">#1976D2</color>
-    <color name="tabsScrollColor">#1565C0</color>
-    <color name="accentColor">#1976D2</color>
-    <color name="textColor">#2196F3</color>
+ <!--blue-->
+ <color name="primaryColor">#2196F3</color>
+ <color name="primaryColorDark">#1976D2</color>
+ <color name="tabsScrollColor">#1565C0</color>
+ <color name="accentColor">#1976D2</color>
+ <color name="textColor">#2196F3</color>
 
-    <!-- deep purple-->
-    <!-- <color name="primaryColor">#673Ab7</color>
-     <color name="primaryColorDark">#512da8</color>
-     <color name="tabsScrollColor">#4527A0</color>
-     <color name="accentColor">#5E35B1</color>
-     <color name="textColor">#673Ab7</color>-->
+ <!-- deep purple-->
+ <!-- <color name="primaryColor">#673Ab7</color>
+  <color name="primaryColorDark">#512da8</color>
+  <color name="tabsScrollColor">#4527A0</color>
+  <color name="accentColor">#5E35B1</color>
+  <color name="textColor">#673Ab7</color>-->
 
-    <!--light blue-->
-    <!-- <color name="primaryColor">#03A9F4</color>
-     <color name="primaryColorDark">#039BE5</color>
-     <color name="tabsScrollColor">#0277BD</color>
-     <color name="accentColor">#03A9F4</color>
-     <color name="textColor">#03A9F4</color>-->
+ <!--light blue-->
+ <!-- <color name="primaryColor">#03A9F4</color>
+  <color name="primaryColorDark">#039BE5</color>
+  <color name="tabsScrollColor">#0277BD</color>
+  <color name="accentColor">#03A9F4</color>
+  <color name="textColor">#03A9F4</color>-->
 
-    <!--green-->
-    <!-- <color name="primaryColor">#4CAF50</color>
-     <color name="primaryColorDark">#43A047</color>
-     <color name="tabsScrollColor">#2E7D32</color>
-     <color name="accentColor">#66BB6A</color>
-     <color name="textColor">#4CAF50</color>-->
+ <!--green-->
+ <!-- <color name="primaryColor">#4CAF50</color>
+  <color name="primaryColorDark">#43A047</color>
+  <color name="tabsScrollColor">#2E7D32</color>
+  <color name="accentColor">#66BB6A</color>
+  <color name="textColor">#4CAF50</color>-->
 
-    <color name="textColorPrimary">#dddddd</color>
+ <color name="textColorPrimary">#dddddd</color>
     <color name="secondaryTextColor">#505050</color>
     <color name="hintTextColor">#a0a0a0</color>
     <color name="buttonColor">#dddddd</color>

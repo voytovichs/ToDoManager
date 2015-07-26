@@ -19,13 +19,12 @@ import com.voytovichs.todomanager.addtaskactivity.AddTaskItemActivity;
 import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
 import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
-import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter.editableElements;
 import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
 
 import java.sql.SQLException;
 
 
-public class MainActivity extends AppCompatActivity implements editableElements {
+public class MainActivity extends AppCompatActivity implements ListViewAdapter.editableElements {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int BUTTON_ICON_SIZE = 70;
@@ -40,8 +39,6 @@ public class MainActivity extends AppCompatActivity implements editableElements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity_layout);
         TaskHelperFactory.setHelper(getApplicationContext());
-
-
         ListView list = (ListView) findViewById(R.id.listView);
         mAdapter = new ListViewAdapter(this);
         list.setAdapter(mAdapter);
@@ -93,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements editableElements 
             TaskItem item = new TaskItem(data);
             mAdapter.add(item);
         } else if (resultCode == RESULT_OK) {
+            mAdapter.delete(requestCode);
+            deleteElement(requestCode);
             TaskItem item = new TaskItem(data);
             mAdapter.add(requestCode, item);
         }
@@ -144,12 +143,16 @@ public class MainActivity extends AppCompatActivity implements editableElements 
     @Override
     public void editElement(int position) {
         TaskItem toEditItem = mAdapter.getItem(position);
-        mAdapter.delete(position);
+        addNewElement(position, toEditItem);
+    }
+
+    @Override
+    public void deleteElement(int position) {
+        TaskItem toEditItem = mAdapter.getItem(position);
         try {
             taskDAO.delete(toEditItem);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        addNewElement(position, toEditItem);
     }
 }

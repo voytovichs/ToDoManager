@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daimajia.swipe.SwipeLayout;
 import com.voytovichs.todomanager.R;
 import com.voytovichs.todomanager.mainactivity.TaskItem;
 
@@ -25,11 +25,14 @@ public class ListViewAdapter extends BaseAdapter {
 
     public interface editableElements {
         void editElement(int position);
+
+        void deleteElement(int position);
     }
 
     private final Context mContext;
     private final List<TaskItem> mData;
     private final editableElements activity;
+    private boolean isSwipe = false;
 
     public ListViewAdapter(Context context) {
         mContext = context;
@@ -57,7 +60,8 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public void delete(int position) {
-        //  activity.deleteFromDB(position);
+        //Don't touch the order!
+        activity.deleteElement(position);
         mData.remove(position);
 
         notifyDataSetChanged();
@@ -89,12 +93,49 @@ public class ListViewAdapter extends BaseAdapter {
         final TaskItem taskItem = mData.get(position);
 
         LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        final LinearLayout itemLayout = (LinearLayout) mInflater.inflate(R.layout.list_item, null);
+        final SwipeLayout listItem = (SwipeLayout) mInflater.inflate(R.layout.list_item, null);
+        listItem.setShowMode(SwipeLayout.ShowMode.LayDown);
+        listItem.addDrag(SwipeLayout.DragEdge.Top, listItem.findViewById(R.id.bottom_wrapper));
+        listItem.addSwipeListener(new SwipeLayout.SwipeListener() {
+            @Override
+            public void onStartOpen(SwipeLayout layout) {
+                isSwipe = true;
+            }
 
-        final TextView titleView = (TextView) itemLayout.findViewById(R.id.listTitle);
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                //when the BottomView totally show.
+                delete(position);
+            }
+
+            @Override
+            public void onStartClose(SwipeLayout layout) {
+                //do nothing
+            }
+
+            @Override
+            public void onClose(SwipeLayout layout) {
+                //when the SurfaceView totally cover the BottomView.
+                //do nothing
+            }
+
+            @Override
+            public void onHandRelease(SwipeLayout swipeLayout, float v, float v1) {
+                //do nothing
+            }
+
+            @Override
+            public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
+                //you are swiping.
+                //do nothing
+            }
+
+        });
+
+        final TextView titleView = (TextView) listItem.findViewById(R.id.listTitle);
         titleView.setText(taskItem.getTitle());
 
-        final CheckBox statusView = (CheckBox) itemLayout.findViewById(R.id.statusCheckBox);
+        final CheckBox statusView = (CheckBox) listItem.findViewById(R.id.statusCheckBox);
         statusView.setChecked(taskItem.getStatus().equals(TaskItem.Status.COMPLETED));
         statusView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -107,37 +148,44 @@ public class ListViewAdapter extends BaseAdapter {
                 }
             }
         });
-        final TextView dateView = (TextView) itemLayout.findViewById(R.id.dateTextView);
+        final TextView dateView = (TextView) listItem.findViewById(R.id.dateTextView);
         dateView.setText(taskItem.getDate());
 
-        final TextView timeView = (TextView) itemLayout.findViewById(R.id.timeTextView);
+        final TextView timeView = (TextView) listItem.findViewById(R.id.timeTextView);
         timeView.setText(taskItem.getTime());
 
-        final TextView commentView = (TextView) itemLayout.findViewById(R.id.listDescription);
+        final TextView commentView = (TextView) listItem.findViewById(R.id.listDescription);
         commentView.setText(taskItem.getComment());
         commentView.setVisibility(View.GONE);
 
-        itemLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (commentView.getText().equals("")) {
-                    return;
-                }
-                if (commentView.isShown()) {
-                    commentView.setVisibility(View.GONE);
-                } else {
-                    commentView.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+        listItem.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            //description should not opens when MotionAction is swipe
+                                            if (isSwipe) {
+                                                isSwipe = false;
+                                                return;
+                                            }
+                                            if (commentView.getText().equals("")) {
+                                                return;
+                                            }
+                                            if (commentView.isShown()) {
+                                                commentView.setVisibility(View.GONE);
+                                            } else {
+                                                commentView.setVisibility(View.VISIBLE);
+                                            }
+                                        }
+                                    }
+        );
 
-        itemLayout.setOnLongClickListener(new View.OnLongClickListener() {
+
+        listItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 activity.editElement(position);
                 return true;
             }
         });
-        return itemLayout;
+        return listItem;
     }
 }
