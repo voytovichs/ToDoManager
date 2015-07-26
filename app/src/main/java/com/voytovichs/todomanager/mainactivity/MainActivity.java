@@ -22,6 +22,7 @@ import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
 import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
 
 import java.sql.SQLException;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ListViewAdapter.editableElements {
@@ -149,6 +150,17 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
             }
         } catch (SQLException e) {
             Log.e(TAG, "Couldn't load tasks: " + e);
+        }
+
+        if (mAdapter.getCount() == 0) {
+            loadDefaultTutorialTasks(mAdapter);
+        }
+    }
+
+    private void loadDefaultTutorialTasks(ListViewAdapter adapter) {
+        List<Intent> tutorialIntents = DefaultTutorialIntents.getTutorialIntents();
+        for (Intent intent : tutorialIntents) {
+            adapter.add(new TaskItem(intent));
         }
     }
 
