@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final int BUTTON_ICON_SIZE = 70;
-    private static final int ADD_TODO_ITEM_REQUEST = 0;
+    private static final int ADD_TODO_ITEM_REQUEST = Byte.MAX_VALUE;
     private TaskDAO taskDAO;
 
 
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
         if (toDoItem != null) {
             TaskItem.packageIntent(toDoIntent, toDoItem);
         }
+        //Bad decision: editing of first element
         startActivityForResult(toDoIntent, finalPosition);
     }
 
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
             TaskItem item = new TaskItem(data);
             mAdapter.add(item);
         } else if (resultCode == RESULT_OK) {
-            mAdapter.delete(requestCode);
             deleteElement(requestCode);
+            mAdapter.delete(requestCode);
             TaskItem item = new TaskItem(data);
             mAdapter.add(requestCode, item);
         }
