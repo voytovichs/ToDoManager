@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.util.Objects;
  */
 public class NameTabFragment extends android.support.v4.app.Fragment {
 
+    private static final String TAG = CalendarTabFragment.class.getSimpleName();
     private MainPageItemsListener mCallback;
     private EditText mTitle = null;
     private EditText mComment = null;
@@ -40,6 +42,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.e(TAG, TAG + "creating");
         View view = inflater.inflate(R.layout.name_tab, container, false);
         setTitleEditText(view);
         setDescriptionEditText(view);
@@ -52,8 +55,10 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
+            Log.e(TAG, "Set callback to " + activity);
             mCallback = (MainPageItemsListener) activity;
         } catch (ClassCastException e) {
+            Log.e(TAG, activity + " doesn't implement MainPageItemsListener interface");
             throw new ClassCastException(activity.toString()
                     + " must implement MainPageItemsListener");
         }
@@ -68,6 +73,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     }
 
     private void setTitleEditText(final View mainView) {
+        Log.e(TAG, "Creating TitleEditText");
         mTitle = (EditText) mainView.findViewById(R.id.taskTitleTextEdit);
         if (!Objects.equals(titleFromActivity, "")) {
             mTitle.setText(titleFromActivity);
@@ -83,6 +89,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
+                    Log.e(TAG, "Sending Title to " + getActivity());
                     hideKeyboard(mTitle);
                     mCallback.sendTitleText(mTitle.getText().toString());
                 }
@@ -92,6 +99,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Log.e(TAG, "Sending Title to " + getActivity());
                     mCallback.sendTitleText(mTitle.getText().toString());
                     hideKeyboard(mTitle);
                     return true;
@@ -104,6 +112,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     }
 
     private void setDescriptionEditText(final View mainView) {
+        Log.e(TAG, "Creating DescriptionEditText");
         mComment = (EditText) mainView.findViewById(R.id.taskDescriptionTextEdit);
         if (!Objects.equals(commentFromActivity, "")) {
             mComment.setText(commentFromActivity);
@@ -119,6 +128,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
+                    Log.e(TAG, "Sending CommentText to " + getActivity());
                     hideKeyboard(mComment);
                     mCallback.sendCommentText(mComment.getText().toString());
                 }
@@ -128,6 +138,7 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    Log.e(TAG, "Sending CommentText to " + getActivity());
                     mCallback.sendCommentText(
                             mComment.getText().toString());
                     hideKeyboard(mComment);
@@ -140,16 +151,19 @@ public class NameTabFragment extends android.support.v4.app.Fragment {
     }
 
     private void showKeyboard(EditText editText) {
+        Log.e(TAG, "Show keyboard for " + editText.toString());
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 
     private void hideKeyboard(EditText editText) {
+        Log.e(TAG, "Hide keyboard from " + editText.toString());
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
     public void closeInputs() {
+        Log.e(TAG, "Close input streams for EditText's");
         mCallback.sendTitleText(mTitle.getText().toString());
         mCallback.sendCommentText(mComment.getText().toString());
     }

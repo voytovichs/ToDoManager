@@ -2,6 +2,7 @@ package com.voytovichs.todomanager.mainactivity.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import java.util.List;
  * Created by voytovichs on 12.07.15.
  */
 public class ListViewAdapter extends BaseAdapter {
+
+    private static final String TAG = ListViewAdapter.class.getSimpleName();
 
     public interface editableElements {
         void editElement(int position);
@@ -46,20 +49,24 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     public void clear() {
+        Log.e(TAG, "Clear task container");
         mData.clear();
     }
 
     public void add(TaskItem item) {
+        Log.e(TAG, "Add task on the top of the list");
         mData.add(0, item);
         notifyDataSetChanged();
     }
 
     public void add(int position, TaskItem item) {
+        Log.e(TAG, "Add task to " + position + " position");
         mData.add(position, item);
         notifyDataSetChanged();
     }
 
     public void delete(int position) {
+        Log.e(TAG, "Delete task from " + position + " position");
         //Don't touch the order!
         activity.deleteElement(position);
         mData.remove(position);
@@ -105,6 +112,7 @@ public class ListViewAdapter extends BaseAdapter {
             @Override
             public void onOpen(SwipeLayout layout) {
                 //when the BottomView totally show.
+                Log.e(TAG, "Swipe starting");
                 delete(position);
             }
 
@@ -141,6 +149,7 @@ public class ListViewAdapter extends BaseAdapter {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                                          boolean isChecked) {
+                Log.e(TAG, "Change comboBoxValue");
                 if (taskItem.getStatus().equals(TaskItem.Status.COMPLETED)) {
                     taskItem.setStatus(TaskItem.Status.INCOMPLETED);
                 } else {
@@ -161,6 +170,7 @@ public class ListViewAdapter extends BaseAdapter {
         listItem.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
+                                            Log.e(TAG, "List item onCLick");
                                             //description should not opens when MotionAction is swipe
                                             if (isSwipe) {
                                                 isSwipe = false;

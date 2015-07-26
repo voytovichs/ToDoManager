@@ -3,6 +3,7 @@ package com.voytovichs.todomanager.addtaskactivity.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.voytovichs.todomanager.R;
  */
 public class TimeTabFragment extends android.support.v4.app.Fragment {
 
+    private static final String TAG = TimeTabFragment.class.getSimpleName();
     TimeListener mCallback;
 
     // Container Activity must implement this interface
@@ -24,6 +26,7 @@ public class TimeTabFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.e(TAG, TAG + "creating");
         View view = inflater.inflate(R.layout.time_tab, container, false);
         setTimePicker(view);
         return view;
@@ -36,8 +39,10 @@ public class TimeTabFragment extends android.support.v4.app.Fragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
+            Log.e(TAG, "Set callback to " + activity);
             mCallback = (TimeListener) activity;
         } catch (ClassCastException e) {
+            Log.e(TAG, activity + " doesn't implement TimeListener interface");
             throw new ClassCastException(activity.toString()
                     + " must implement TimeListener");
         }
@@ -63,6 +68,7 @@ public class TimeTabFragment extends android.support.v4.app.Fragment {
         clock.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                Log.e(TAG, "Sending time to " + getActivity());
                 mCallback.sendTime(timeToString(hourOfDay, minute));
             }
         });

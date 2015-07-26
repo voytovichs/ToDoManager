@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
         TaskHelperFactory.setHelper(getApplicationContext());
         ListView list = (ListView) findViewById(R.id.listView);
         mAdapter = new ListViewAdapter(this);
+        Log.e(TAG, "Attack adapter to list view");
         list.setAdapter(mAdapter);
         LinearLayout.LayoutParams mParam = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         list.setLayoutParams(mParam);
@@ -54,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
     }
 
     private void setFloatingButton() {
+
+        Log.e(TAG, "Creating floating button");
 
         Drawable dr = getDrawable(R.drawable.add_button);
         assert dr != null;
@@ -70,12 +73,14 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.e(TAG, "Floating button onCLick");
                 addNewElement(ADD_TODO_ITEM_REQUEST, null);
             }
         });
     }
 
     private void addNewElement(int finalPosition, @Nullable TaskItem toDoItem) {
+        Log.e(TAG, "Start adding new element to list");
         Intent toDoIntent = new Intent(MainActivity.this, AddTaskItemActivity.class);
         if (toDoItem != null) {
             TaskItem.packageIntent(toDoIntent, toDoItem);
@@ -86,6 +91,8 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Log.e(TAG, "Getting result from the activityForResult");
 
         if (requestCode == ADD_TODO_ITEM_REQUEST && resultCode == RESULT_OK) {
             TaskItem item = new TaskItem(data);
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
 
     @Override
     public void onResume() {
+        Log.e(TAG, "OnResume");
         super.onResume();
         if (mAdapter.getCount() == 0) {
             loadItems();
@@ -108,12 +116,14 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
 
     @Override
     protected void onPause() {
+        Log.e(TAG, "OnPause");
         super.onPause();
         saveItems();
     }
 
     private void saveItems() {
 
+        Log.e(TAG, "Saving items to database");
         try {
             taskDAO.delete(mAdapter.getCollection());
         } catch (SQLException e) {
@@ -130,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
     }
 
     private void loadItems() {
+        Log.e(TAG, "Load items from database");
         mAdapter.clear();
         try {
             for (TaskItem taskItem : taskDAO.queryForAll()) {
@@ -143,17 +154,21 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
 
     @Override
     public void editElement(int position) {
+        Log.e(TAG, "Start editing element");
         TaskItem toEditItem = mAdapter.getItem(position);
         addNewElement(position, toEditItem);
+        Log.e(TAG, "Finish editing element");
     }
 
     @Override
     public void deleteElement(int position) {
+        Log.e(TAG, "Start deleting element");
         TaskItem toEditItem = mAdapter.getItem(position);
         try {
             taskDAO.delete(toEditItem);
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        Log.e(TAG, "Finish editing element");
     }
 }

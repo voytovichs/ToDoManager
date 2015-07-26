@@ -11,7 +11,7 @@ import com.j256.ormlite.table.DatabaseTable;
  */
 @DatabaseTable(tableName = "tasks")
 public class TaskItem {
-
+    
     public enum Status {COMPLETED, INCOMPLETED}
 
     public final static String TITLE = "title";

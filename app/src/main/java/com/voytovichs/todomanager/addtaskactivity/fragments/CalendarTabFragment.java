@@ -3,6 +3,7 @@ package com.voytovichs.todomanager.addtaskactivity.fragments;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.voytovichs.todomanager.R;
  */
 public class CalendarTabFragment extends android.support.v4.app.Fragment {
 
+    private static final String TAG = CalendarTabFragment.class.getSimpleName();
     CalendarListener mCallback;
 
     // Container Activity must implement this interface
@@ -24,6 +26,7 @@ public class CalendarTabFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.e(TAG, TAG + "creating");
         View view = inflater.inflate(R.layout.calendar_tab, container, false);
         setDatePicker(view);
         return view;
@@ -36,8 +39,10 @@ public class CalendarTabFragment extends android.support.v4.app.Fragment {
         // This makes sure that the container activity has implemented
         // the callback interface. If not, it throws an exception
         try {
+            Log.e(TAG, "Set callback to " + activity);
             mCallback = (CalendarListener) activity;
         } catch (ClassCastException e) {
+            Log.e(TAG, activity + " doesn't implement CalendarListener interface");
             throw new ClassCastException(activity.toString()
                     + " must implement Calendar");
         }
@@ -63,6 +68,7 @@ public class CalendarTabFragment extends android.support.v4.app.Fragment {
         mCalendar.init(mCalendar.getYear(), mCalendar.getMonth(), mCalendar.getDayOfMonth(), new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                Log.e(TAG, "Sending date to " + getActivity());
                 mCallback.sendDate(toStringDate(year, monthOfYear, dayOfMonth));
             }
         });
