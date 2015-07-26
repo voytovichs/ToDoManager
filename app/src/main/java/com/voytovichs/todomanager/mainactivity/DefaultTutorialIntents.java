@@ -16,13 +16,14 @@ public class DefaultTutorialIntents {
 
         Intent deleteIntent = new Intent();
         deleteIntent.putExtra(TaskItem.TITLE, "Swipe to delete");
-        deleteIntent.putExtra(TaskItem.COMMENT, "These are all you need to know");
+        deleteIntent.putExtra(TaskItem.COMMENT, "That's all you need to know");
         setDefaultParameters(deleteIntent);
         list.add(deleteIntent);
 
         Intent editIntent = new Intent();
         editIntent.putExtra(TaskItem.TITLE, "Touch a bit longer to edit task");
-        editIntent.putExtra(TaskItem.COMMENT, "You do it wrong \n Touch longer!");
+        editIntent.putExtra(TaskItem.COMMENT, "You do it wrong\n" +
+                "Touch longer!");
         setDefaultParameters(editIntent);
         list.add(editIntent);
 
