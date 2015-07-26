@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
             TaskItem item = new TaskItem(data);
             mAdapter.add(item);
         } else if (resultCode == RESULT_OK) {
+            mAdapter.delete(requestCode);
+            deleteElement(requestCode);
             TaskItem item = new TaskItem(data);
             mAdapter.add(requestCode, item);
         }
@@ -137,15 +139,10 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.e
             Log.e(TAG, "Couldn't load tasks: " + e);
         }
     }
+
     @Override
     public void editElement(int position) {
         TaskItem toEditItem = mAdapter.getItem(position);
-        mAdapter.delete(position);
-        try {
-            taskDAO.delete(toEditItem);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
         addNewElement(position, toEditItem);
     }
 
