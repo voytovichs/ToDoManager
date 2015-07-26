@@ -117,15 +117,16 @@ public class ListViewAdapter extends BaseAdapter {
             }
 
             @Override
+            public void onClose(SwipeLayout layout) {
+                //when the SurfaceView totally cover the BottomView.
+                isSwipe = false;
+            }
+
+            @Override
             public void onStartClose(SwipeLayout layout) {
                 //do nothing
             }
 
-            @Override
-            public void onClose(SwipeLayout layout) {
-                //when the SurfaceView totally cover the BottomView.
-                //do nothing
-            }
 
             @Override
             public void onHandRelease(SwipeLayout swipeLayout, float v, float v1) {
@@ -192,6 +193,10 @@ public class ListViewAdapter extends BaseAdapter {
         listItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
+                if (isSwipe) {
+                    isSwipe = false;
+                    return false;
+                }
                 activity.editElement(position);
                 return true;
             }
