@@ -35,7 +35,9 @@ public class ListViewAdapter extends BaseAdapter {
     private final Context mContext;
     private final List<TaskItem> mData;
     private final editableElements activity;
-    private boolean isSwipe = false;
+
+    private boolean hasHandReleased = true;
+    private boolean hasBottomViewCovered = true;
 
     public ListViewAdapter(Context context) {
         mContext = context;
@@ -106,37 +108,41 @@ public class ListViewAdapter extends BaseAdapter {
         listItem.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                isSwipe = true;
+                Log.e(TAG, "Swipe starting");
+                hasHandReleased = false;
+                hasBottomViewCovered = false;
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                //when the BottomView totally show.
-                Log.e(TAG, "Swipe starting");
+                Log.e(TAG, "BottomView totally show");
                 delete(position);
             }
 
             @Override
             public void onClose(SwipeLayout layout) {
-                //when the SurfaceView totally cover the BottomView.
-                isSwipe = false;
+                Log.e(TAG, "SurfaceView totally cover the BottomView");
+                hasBottomViewCovered = true;
             }
 
             @Override
             public void onStartClose(SwipeLayout layout) {
+                Log.e(TAG, "Start close");
                 //do nothing
             }
 
 
             @Override
             public void onHandRelease(SwipeLayout swipeLayout, float v, float v1) {
-                //do nothing
+                Log.e(TAG, "Hand release");
+                hasHandReleased = true;
             }
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-                //you are swiping.
-                //do nothing
+                Log.e(TAG, "Swiping");
+                hasHandReleased = false;
+                hasBottomViewCovered = false;
             }
 
         });
@@ -173,8 +179,7 @@ public class ListViewAdapter extends BaseAdapter {
                                         public void onClick(View v) {
                                             Log.e(TAG, "List item onCLick");
                                             //description should not opens when MotionAction is swipe
-                                            if (isSwipe) {
-                                                isSwipe = false;
+                                            if (!(hasBottomViewCovered && hasHandReleased)) {
                                                 return;
                                             }
                                             if (commentView.getText().equals("")) {
@@ -193,12 +198,11 @@ public class ListViewAdapter extends BaseAdapter {
         listItem.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                if (isSwipe) {
-                    isSwipe = false;
-                    return false;
+                if (hasBottomViewCovered && hasBottomViewCovered) {
+                    activity.editElement(position);
+                    return true;
                 }
-                activity.editElement(position);
-                return true;
+                return false;
             }
         });
         return listItem;
