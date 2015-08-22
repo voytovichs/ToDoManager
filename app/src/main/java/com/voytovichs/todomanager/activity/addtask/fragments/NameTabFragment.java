@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.addtaskactivity.fragments;
+package com.voytovichs.todomanager.activity.addtask.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.voytovichs.todomanager.R;
-import com.voytovichs.todomanager.mainactivity.TaskItem;
+import com.voytovichs.todomanager.activity.mainactivity.TaskItem;
 
 import java.util.Objects;
 

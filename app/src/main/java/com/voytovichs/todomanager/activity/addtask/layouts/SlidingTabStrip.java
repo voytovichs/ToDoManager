@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.addtaskactivity.layouts;
+package com.voytovichs.todomanager.activity.addtask.layouts;
 
 /*
  * Copyright 2014 Google Inc. All rights reserved.

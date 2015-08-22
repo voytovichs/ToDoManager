@@ -1,13 +1,13 @@
-package com.voytovichs.todomanager.addtaskactivity.adapters;
+package com.voytovichs.todomanager.activity.addtask.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.util.Log;
 
-import com.voytovichs.todomanager.addtaskactivity.fragments.CalendarTabFragment;
-import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
-import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
+import com.voytovichs.todomanager.activity.addtask.fragments.NameTabFragment;
+import com.voytovichs.todomanager.activity.addtask.fragments.TimeTabFragment;
+import com.voytovichs.todomanager.activity.addtask.fragments.CalendarTabFragment;
 
 /**
  * Created by voytovichs on 08.07.15.

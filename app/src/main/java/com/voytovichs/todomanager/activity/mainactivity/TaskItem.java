@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.mainactivity;
+package com.voytovichs.todomanager.activity.mainactivity;
 
 import android.content.Intent;
 

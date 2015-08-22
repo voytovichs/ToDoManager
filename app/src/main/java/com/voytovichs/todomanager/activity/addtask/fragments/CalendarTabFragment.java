@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.addtaskactivity.fragments;
+package com.voytovichs.todomanager.activity.addtask.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;

@@ -2,7 +2,7 @@ package com.voytovichs.todomanager.dao;
 
 import com.j256.ormlite.dao.BaseDaoImpl;
 import com.j256.ormlite.support.ConnectionSource;
-import com.voytovichs.todomanager.mainactivity.TaskItem;
+import com.voytovichs.todomanager.activity.mainactivity.TaskItem;
 
 import java.sql.SQLException;
 

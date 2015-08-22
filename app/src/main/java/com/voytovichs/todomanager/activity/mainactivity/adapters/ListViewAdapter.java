@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.mainactivity.adapters;
+package com.voytovichs.todomanager.activity.mainactivity.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.voytovichs.todomanager.R;
-import com.voytovichs.todomanager.mainactivity.TaskItem;
+import com.voytovichs.todomanager.activity.mainactivity.TaskItem;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -108,39 +108,38 @@ public class ListViewAdapter extends BaseAdapter {
         listItem.addSwipeListener(new SwipeLayout.SwipeListener() {
             @Override
             public void onStartOpen(SwipeLayout layout) {
-                Log.e(TAG, "Swipe starting");
+                Log.e(TAG, "Swipe: start");
                 hasHandReleased = false;
                 hasBottomViewCovered = false;
             }
 
             @Override
             public void onOpen(SwipeLayout layout) {
-                Log.e(TAG, "BottomView totally show");
+                Log.e(TAG, "Swipe: bottom view totally show");
                 delete(position);
             }
 
             @Override
             public void onClose(SwipeLayout layout) {
-                Log.e(TAG, "SurfaceView totally cover the BottomView");
+                Log.e(TAG, "Swipe: surface view totally cover the bottom view");
                 hasBottomViewCovered = true;
             }
 
             @Override
             public void onStartClose(SwipeLayout layout) {
-                Log.e(TAG, "Start close");
+                Log.e(TAG, "Swipe: start closing");
                 //do nothing
             }
 
 
             @Override
             public void onHandRelease(SwipeLayout swipeLayout, float v, float v1) {
-                Log.e(TAG, "Hand release");
+                Log.e(TAG, "Swipe: hand release");
                 hasHandReleased = true;
             }
 
             @Override
             public void onUpdate(SwipeLayout layout, int leftOffset, int topOffset) {
-                Log.e(TAG, "Swiping");
                 hasHandReleased = false;
                 hasBottomViewCovered = false;
             }
@@ -177,7 +176,7 @@ public class ListViewAdapter extends BaseAdapter {
         listItem.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            Log.e(TAG, "List item onCLick");
+                                            Log.e(TAG, "List item clicked");
                                             //description should not opens when MotionAction is swipe
                                             if (!(hasBottomViewCovered && hasHandReleased)) {
                                                 return;

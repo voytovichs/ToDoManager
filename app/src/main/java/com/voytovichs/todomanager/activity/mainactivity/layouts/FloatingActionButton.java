@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.mainactivity.layouts;
+package com.voytovichs.todomanager.activity.mainactivity.layouts;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

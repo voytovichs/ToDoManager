@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.mainactivity;
+package com.voytovichs.todomanager.activity.mainactivity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,11 +15,11 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.voytovichs.todomanager.R;
-import com.voytovichs.todomanager.addtaskactivity.AddTaskItemActivity;
+import com.voytovichs.todomanager.activity.addtask.AddTaskItemActivity;
+import com.voytovichs.todomanager.activity.mainactivity.adapters.ListViewAdapter;
 import com.voytovichs.todomanager.dao.TaskDAO;
 import com.voytovichs.todomanager.dao.TaskHelperFactory;
-import com.voytovichs.todomanager.mainactivity.adapters.ListViewAdapter;
-import com.voytovichs.todomanager.mainactivity.layouts.FloatingActionButton;
+import com.voytovichs.todomanager.activity.mainactivity.layouts.FloatingActionButton;
 
 import java.sql.SQLException;
 import java.util.List;

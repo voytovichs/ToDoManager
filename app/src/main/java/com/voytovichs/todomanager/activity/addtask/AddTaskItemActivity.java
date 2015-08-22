@@ -1,4 +1,4 @@
-package com.voytovichs.todomanager.addtaskactivity;
+package com.voytovichs.todomanager.activity.addtask;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -9,13 +9,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.voytovichs.todomanager.R;
-import com.voytovichs.todomanager.addtaskactivity.adapters.ViewPagerAdapter;
-import com.voytovichs.todomanager.addtaskactivity.fragments.CalendarTabFragment;
-import com.voytovichs.todomanager.addtaskactivity.fragments.NameTabFragment;
-import com.voytovichs.todomanager.addtaskactivity.fragments.TimeTabFragment;
-import com.voytovichs.todomanager.addtaskactivity.layouts.SlidingTabLayout;
-import com.voytovichs.todomanager.mainactivity.TaskItem;
-import com.voytovichs.todomanager.mainactivity.TaskItem.Status;
+import com.voytovichs.todomanager.activity.addtask.adapters.ViewPagerAdapter;
+import com.voytovichs.todomanager.activity.addtask.fragments.CalendarTabFragment;
+import com.voytovichs.todomanager.activity.addtask.fragments.NameTabFragment;
+import com.voytovichs.todomanager.activity.addtask.fragments.TimeTabFragment;
+import com.voytovichs.todomanager.activity.addtask.layouts.SlidingTabLayout;
+import com.voytovichs.todomanager.activity.mainactivity.TaskItem;
+import com.voytovichs.todomanager.activity.mainactivity.TaskItem.Status;
 
 /**
  * Created by voytovichs on 05.07.15.
