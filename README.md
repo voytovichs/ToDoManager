@@ -9,6 +9,6 @@ To do manager for Android
  
  - Choose optional time
  
- Tap to see inforation 
+Tap to see information 
  
- Swipe to delete
+Swipe to delete
