@@ -1,15 +1,11 @@
-# ToDoManager
+# To do list
+![](https://github.com/voytovichs/ToDoManager/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
+
 To do manager for Android
  
- Add your task following theese steps
+ Screenshots: (https://github.com/voytovichs/ToDoManager/tree/master/screenshots)
  
- - Name your task and add optional description 
-
- - Choose optional date
-
- - Choose optional time
-
-Tap to see information 
-
-Swipe to delete
+ Download apk: (https://raw.githubusercontent.com/voytovichs/ToDoManager/master/todo-list.apk)
+ 
+ 
 
