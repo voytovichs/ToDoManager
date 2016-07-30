@@ -1,4 +1,4 @@
-# To do list
+# Too do
 ![](https://github.com/voytovichs/ToDoManager/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png)
 
 Android to do manager
